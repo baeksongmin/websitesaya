@@ -1,0 +1,2082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find and locate artisans in Malaysia on the CraftGallery interactive map">
+    <meta name="keywords" content="Malaysian artisans, craftspeople locations, handmade, find artisans">
+    <meta name="author" content="CraftGallery">
+   <br><br><br>
+    <title>CraftGallery - Malaysian Artisan Map</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <!-- MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    
+    <style>
+        :root {
+            --primary-color: #4a6bdf;
+            --secondary-color: #9c3fe6;
+            --accent-color: #de2828;
+            --bright-accent: #FF9C1A;
+            --cheerful-green: #22DD9B;
+            --playful-pink: #FF6B9F;
+            --dark-color: #1c1d25;
+            --light-color: #f9f9ff;
+            --card-shadow: 0 10px 30px rgba(74, 107, 223, 0.08);
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-color);
+            color: #444;
+            line-height: 1.6;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234a6bdf' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        /* Skip to main content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            z-index: 1001;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        header {
+            background: var(--gradient);
+            min-height: 30vh;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 2rem 2rem;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Header decoration */
+        .header-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            opacity: 0.1;
+        }
+
+        .header-decoration-item {
+            position: absolute;
+            font-size: 8rem;
+            color: white;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .header-decoration-item:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .header-decoration-item:nth-child(2) {
+            top: 60%;
+            left: 20%;
+            animation-delay: 1s;
+        }
+
+        .header-decoration-item:nth-child(3) {
+            top: 20%;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .header-decoration-item:nth-child(4) {
+            top: 50%;
+            left: 80%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .header-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+            margin-bottom: 2rem;
+        }
+        
+        /* Fixed header text that stays visible on scroll */
+        .fixed-header-text {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            z-index: 990;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .fixed-header-text.visible {
+            transform: translateY(0);
+        }
+
+        .fixed-header-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        /* Fixed header text that stays visible on scroll */
+        .fixed-header-text {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            z-index: 990;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .fixed-header-text.visible {
+            transform: translateY(0);
+        }
+
+        .fixed-header-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        /* Navigation - Aligned with homepage */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        nav.scrolled .logo {
+            color: var(--primary-color);
+        }
+
+        .logo:hover {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav.scrolled a {
+            color: var(--dark-color);
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        nav.scrolled a:hover, nav.scrolled a.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        /* Mobile menu styles */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        nav.scrolled .menu-toggle {
+            color: var(--primary-color);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Map container */
+        .map-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin-top: -30px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .map-controls {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px 15px 0 0;
+            box-shadow: var(--card-shadow);
+            z-index: 100;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .search-box {
+            max-width: 100%;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 30px;
+            border: 2px solid transparent;
+            background: var(--light-color);
+            box-shadow: var(--card-shadow);
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(74, 107, 223, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .filter-section {
+            margin-bottom: 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-btn i {
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        .actions-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .locate-me-btn {
+            background: var(--gradient);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        .locate-me-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 107, 223, 0.3);
+        }
+
+        /* Map styles */
+        #map {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            z-index: 50;
+        }
+
+        /* Custom Marker Popup Styles */
+        .custom-popup {
+            max-width: 300px;
+            padding: 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .leaflet-popup-content-wrapper {
+            padding: 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .leaflet-popup-content {
+            margin: 0;
+            width: 100%;
+        }
+
+        .leaflet-container a.leaflet-popup-close-button {
+            top: 10px;
+            right: 10px;
+            color: white;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .popup-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .popup-content {
+            padding: 15px;
+            background: white;
+        }
+
+        .popup-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+
+        .popup-specialty {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .popup-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .popup-tag {
+            background: rgba(74, 107, 223, 0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .popup-address {
+            font-size: 0.85rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .popup-address i {
+            color: var(--accent-color);
+        }
+
+        .popup-description {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .view-artisan-btn {
+            background: var(--gradient);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .view-artisan-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        /* Custom marker styles */
+        .artisan-marker {
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .artisan-marker:hover {
+            transform: scale(1.1);
+            z-index: 1000 !important;
+        }
+
+        .artisan-marker img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .marker-badge {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .marker-badge i {
+            color: white;
+            font-size: 8px;
+        }
+
+        /* State overlay styles */
+        .state-label {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            color: var(--dark-color);
+            border: 1px solid rgba(74, 107, 223, 0.3);
+        }
+
+        /* Map Legend */
+        .map-legend {
+            position: absolute;
+            bottom: 30px;
+            right: 15px;
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            z-index: 500;
+            max-width: 250px;
+        }
+
+        .legend-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Nearest artisans panel */
+        .nearest-artisans {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 1.5rem;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 900;
+            border-radius: 20px 20px 0 0;
+            max-height: 65vh;
+            overflow-y: auto;
+        }
+
+        .nearest-artisans.active {
+            transform: translateY(0);
+        }
+
+        .nearest-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nearest-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nearest-title i {
+            color: var(--primary-color);
+        }
+
+        .close-nearest {
+            background: transparent;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 1.2rem;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-nearest:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--accent-color);
+        }
+
+        .artisan-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .artisan-result-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--light-color);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .artisan-result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(74, 107, 223, 0.15);
+        }
+
+        .result-img-container {
+            height: 160px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .result-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .artisan-result-card:hover .result-img {
+            transform: scale(1.05);
+        }
+
+        .result-category-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--accent-color);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(222, 40, 40, 0.3);
+        }
+
+        .result-details {
+            padding: 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .result-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+
+        .result-specialty {
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .result-address {
+            font-size: 0.8rem;
+            color: #666;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .result-address i {
+            color: var(--accent-color);
+            margin-top: 3px;
+        }
+
+        .result-distance {
+            font-size: 0.8rem;
+            color: #777;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: auto;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 5px 12px;
+            border-radius: 20px;
+            align-self: flex-start;
+        }
+
+        .result-distance i {
+            color: var(--secondary-color);
+        }
+
+        /* Artisan state sections */
+        .state-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 3rem;
+            background: var(--light-color);
+        }
+
+        .state-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .state-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .state-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .state-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .state-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .state-artisans {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Loading indicator */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .loading.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--light-color);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-about {
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-logo i {
+            font-size: 2.2rem;
+            -webkit-text-fill-color: initial;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-about p {
+            color: #ddd;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-social a:hover {
+            background: var(--gradient);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a i {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            text-align: center;
+            color: #ddd;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .header-content h1 {
+                font-size: 3rem;
+            }
+            
+            .map-legend {
+                bottom: 20px;
+                right: 10px;
+                max-width: 200px;
+                padding: 10px;
+            }
+            
+            .state-sections {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                min-height: 25vh;
+            }
+
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .header-content p {
+                font-size: 1rem;
+            }
+            
+            .fixed-header-text {
+                top: 60px;
+            }
+
+            .nav-container { 
+                padding: 0.5rem 1rem; 
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav.scrolled .menu-toggle { 
+                color: var(--primary-color); 
+            }
+            
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.5rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 1010;
+            }
+            
+            nav ul.active { 
+                transform: translateY(0); 
+            }
+            
+            nav a { 
+                color: var(--dark-color); 
+            }
+
+            .map-controls {
+                padding: 1rem;
+            }
+
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .actions-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .locate-me-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .state-sections {
+                padding: 1rem;
+            }
+
+            .state-artisans {
+                grid-template-columns: 1fr;
+            }
+            
+            .artisan-results {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-legend {
+                bottom: 10px;
+                right: 10px;
+                max-width: 180px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Loading indicator -->
+    <div class="loading" id="loadingIndicator">
+        <div class="spinner"></div>
+    </div>
+    
+    <nav role="navigation">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-palette"></i> CraftGallery
+            </a>
+            
+            <!-- Mobile menu toggle button -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul id="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="artisans.html"><i class="fas fa-user-friends"></i> Artisans</a></li>
+                <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="tutorials.html"><i class="fas fa-book-open"></i> Tutorials</a></li>
+                <li><a href="reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+                <li><a href="map.html" class="active" aria-current="page"><i class="fas fa-map-marked-alt"></i> Map</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Fixed header text that stays visible on scroll -->
+    <div class="fixed-header-text" id="fixed-header-text">
+        <h2>Malaysian Artisan Map</h2>
+    </div>
+
+    <header role="banner" id="header">
+        <div class="header-decoration">
+            <div class="header-decoration-item"><i class="fas fa-map-marked-alt"></i></div>
+            <div class="header-decoration-item"><i class="fas fa-compass"></i></div>
+            <div class="header-decoration-item"><i class="fas fa-location-dot"></i></div>
+            <div class="header-decoration-item"><i class="fas fa-palette"></i></div>
+        </div>
+        <div class="header-content">
+            <h1>Malaysian Artisan Map</h1>
+            <p>Discover local craftspeople and traditional arts across Malaysia</p>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="map-container">
+            <div class="map-controls">
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search artisans or locations in Malaysia..." aria-label="Search artisans">
+                    <div class="search-icon" aria-hidden="true">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <div class="filter-buttons" role="group" aria-label="Filter artisans by category">
+                        <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">
+                            <i class="fas fa-border-all"></i> All
+                        </button>
+                        <button type="button" class="filter-btn" data-filter="pottery" aria-pressed="false">
+                            <i class="fas fa-vase"></i> Pottery
+                        </button>
+                        <button type="button" class="filter-btn" data-filter="weaving" aria-pressed="false">
+                            <i class="fas fa-vector-square"></i> Weaving
+                        </button>
+                        <button type="button" class="filter-btn" data-filter="batik" aria-pressed="false">
+                            <i class="fas fa-tshirt"></i> Batik
+                        </button>
+                        <button type="button" class="filter-btn" data-filter="woodworking" aria-pressed="false">
+                            <i class="fas fa-tree"></i> Woodworking
+                        </button>
+                        <button type="button" class="filter-btn" data-filter="jewelry" aria-pressed="false">
+                            <i class="fas fa-gem"></i> Jewelry
+                        </button>
+                        <button type="button" class="filter-btn" data-filter="metalwork" aria-pressed="false">
+                            <i class="fas fa-hammer"></i> Metalwork
+                        </button>
+                        <button type="button" class="filter-btn" data-filter="kite" aria-pressed="false">
+                            <i class="fas fa-wind"></i> Kite Making
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="actions-row">
+                    <button type="button" id="locateMe" class="locate-me-btn">
+                        <i class="fas fa-location-crosshairs"></i> Find Artisans Near Me
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Map will be inserted here -->
+            <div id="map" role="application" aria-label="Interactive map of Malaysian artisan locations"></div>
+            
+            <!-- Map Legend -->
+            <div class="map-legend" id="mapLegend">
+                <div class="legend-title">
+                    <i class="fas fa-palette"></i> Artisan Types
+                </div>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #e67e22;"></div>
+                        <span>Pottery</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #3498db;"></div>
+                        <span>Weaving</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #9b59b6;"></div>
+                        <span>Batik</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #8d6e63;"></div>
+                        <span>Woodworking</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #f1c40f;"></div>
+                        <span>Jewelry</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #95a5a6;"></div>
+                        <span>Metalwork</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #e74c3c;"></div>
+                        <span>Kite Making</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Nearest artisans panel (hidden by default) -->
+        <div class="nearest-artisans" id="nearestArtisans">
+            <div class="nearest-header">
+                <div class="nearest-title">
+                    <i class="fas fa-location-dot"></i> Nearby Artisans
+                </div>
+                <button type="button" class="close-nearest" id="closeNearest" aria-label="Close panel">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="artisan-results" id="artisanResults">
+                <!-- Results will be dynamically added here -->
+            </div>
+        </div>
+        
+        <!-- Tooltip -->
+        <div class="tooltip" id="tooltip"></div>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <i class="fas fa-palette"></i> CraftGallery
+                </div>
+                <p>Celebrating and preserving Malaysia's rich crafting traditions through our curated collection of artisan masterpieces.</p>
+               
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-angle-right"></i> Home</a></li>
+                    <li><a href="artisans.html"><i class="fas fa-angle-right"></i> Artisans</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-angle-right"></i> Gallery</a></li>
+                    <li><a href="tutorials.html"><i class="fas fa-angle-right"></i> Tutorials</a></li>
+                    <li><a href="contact.html"><i class="fas fa-angle-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            
+           
+            
+            <div class="footer-links">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Alor Setar,Kedah, Malaysia</a></li>
+                    <li><a href="tel:+601137575698"><i class="fas fa-phone"></i> +60 1137575698</a></li>
+                    <li><a href="mailto:muhdfayyadh256@gmail.com"><i class="fas fa-envelope"></i> muhdfayyadh256@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2025 CraftGallery. All rights reserved. Supporting Malaysian artisans and cultural heritage.
+        </div>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- MarkerCluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // UI Elements
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const searchInput = document.getElementById('searchInput');
+            const locateMeBtn = document.getElementById('locateMe');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const nearestPanel = document.getElementById('nearestArtisans');
+            const closeNearest = document.getElementById('closeNearest');
+            const artisanResults = document.getElementById('artisanResults');
+            const tooltip = document.getElementById('tooltip');
+            const menuToggle = document.getElementById('menuToggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            // Store current filter
+            let currentFilter = 'all';
+            
+            // Sample artisan data with coordinates - Malaysian artisans
+            // In a real application, this would come from a database or API
+            const artisans = [
+                {
+                    id: 1,
+                    name: "Ruwaida Baharudin",
+                    specialty: "Master Woodcarver",
+                    category: "woodworking",
+                    state: "Kuala Lumpur",
+                    address: "Kuala Lumpur, Malaysia",
+                    description: "A Malaysian woodcarver with over 10 years of experience, recognized for her contributions to the art form.",
+                    lat: 3.1390,
+                    lng: 101.6869,
+                    image: "picture/ruwaida baharudin.jpg"
+                },
+                {
+                    id: 2,
+                    name: "Toh Puan Dato' Seri Hajjah Dr. Aishah Ong",
+                    specialty: "Batik & Songket",
+                    category: "batik",
+                    state: "Kuala Lumpur",
+                    address: "Kuala Lumpur, Malaysia",
+                    description: "While better known as a patron of crafts, she's closely associated with promoting Malaysian artisans, especially in batik and songket.",
+                    lat: 3.1519,
+                    lng: 101.7033,
+                    image: "picture/artisan_2.jpg"
+                },
+                {
+                    id: 3,
+                    name: "Pak Shafie",
+                    specialty: "Kite Maker",
+                    category: "kite",
+                    state: "Kelantan",
+                    address: "Kelantan, Malaysia",
+                    description: "Known for crafting traditional \"Wau\" kites, especially the Wau Bulan. His workshop in Kelantan is a cultural landmark.",
+                    lat: 6.1250,
+                    lng: 102.2386,
+                    image: "picture/artisan_3.jpg"
+                },
+                {
+                    id: 4,
+                    name: "Tengku Marina Ibrahim",
+                    specialty: "Weaver",
+                    category: "weaving",
+                    state: "Sarawak",
+                    address: "Sarawak, Malaysia",
+                    description: "She's a master songket weaver preserving the art of weaving gold-threaded textiles in Kuching.",
+                    lat: 1.5535,
+                    lng: 110.3593,
+                    image: "picture/artisan_4.jpg"
+                },
+                {
+                    id: 5,
+                    name: "Rozana Musa",
+                    specialty: "Ceramicist",
+                    category: "pottery",
+                    state: "Melaka",
+                    address: "Melaka, Malaysia",
+                    description: "Her minimalist yet functional pieces reflect a modern take on traditional pottery.",
+                    lat: 2.1896,
+                    lng: 102.2501,
+                    image: "picture/artisan_5.jpg"
+                },
+                {
+                    id: 6,
+                    name: "Lee Chee Cheng",
+                    specialty: "Woodcarver",
+                    category: "woodworking",
+                    state: "Penang",
+                    address: "George Town, Penang, Malaysia",
+                    description: "Known for carving traditional Chinese signboards with Jelutong wood and gold leaf.",
+                    lat: 5.4141,
+                    lng: 100.3288,
+                    image: "picture/artisan_6.jpg"
+                },
+                {
+                    id: 7,
+                    name: "Norhaiza Noordin",
+                    specialty: "Shadow Puppets",
+                    category: "traditional-art",
+                    state: "Kelantan",
+                    address: "Kelantan, Malaysia",
+                    description: "A dedicated shadow puppet craftsman who has modernized traditional wayang kulit patterns.",
+                    lat: 6.1531,
+                    lng: 102.2478,
+                    image: "picture/artisan_7.jpg"
+                },
+                {
+                    id: 8,
+                    name: "Asmah Ismail",
+                    specialty: "Pandan Weaver",
+                    category: "weaving",
+                    state: "Sarawak",
+                    address: "Sarawak, Malaysia",
+                    description: "A renowned pandan weaver who transforms this versatile leaf into exquisite mats, baskets, and decorative items.",
+                    lat: 1.5729,
+                    lng: 110.3785,
+                    image: "picture/artisan_8.jpg"
+                },
+                {
+                    id: 9,
+                    name: "Mohd Daud bin Yusoff",
+                    specialty: "Silversmith",
+                    category: "jewelry",
+                    state: "Kelantan",
+                    address: "Kota Bharu, Kelantan, Malaysia",
+                    description: "A master silversmith who blends traditional Malay motifs with contemporary designs.",
+                    lat: 6.1333,
+                    lng: 102.2486,
+                    image: "picture/artisan_9.jpg"
+                },
+                {
+                    id: 10,
+                    name: "Siti Zainon Ismail",
+                    specialty: "Batik Artist",
+                    category: "batik",
+                    state: "Terengganu",
+                    address: "Terengganu, Malaysia",
+                    description: "An accomplished batik artist whose innovative designs incorporate traditional elements with abstract forms.",
+                    lat: 5.3302,
+                    lng: 103.1408,
+                    image: "picture/artisan_10.jpg"
+                },
+                {
+                    id: 11,
+                    name: "Haja Mohideen Mohammed Shariff",
+                    specialty: "Songkok Maker",
+                    category: "traditional-art",
+                    state: "Penang",
+                    address: "Penang, Malaysia",
+                    description: "One of the last traditional songkok makers in Penang, handcrafting these Malay headgear pieces since 1974.",
+                    lat: 5.4356,
+                    lng: 100.3091,
+                    image: "picture/artisan_11.jpg"
+                },
+                {
+                    id: 12,
+                    name: "Nik Rashiddin Nik Hussein",
+                    specialty: "Woodcarver",
+                    category: "woodworking",
+                    state: "Kelantan",
+                    address: "Kelantan, Malaysia",
+                    description: "A master woodcarver known for his exquisite carvings of traditional house components, furniture, and decorative items.",
+                    lat: 6.1153,
+                    lng: 102.2175,
+                    image: "picture/artisan_12.jpg"
+                },
+                {
+                    id: 13,
+                    name: "Abdul Rahman Abu Bakar",
+                    specialty: "Kite Maker",
+                    category: "kite",
+                    state: "Kelantan",
+                    address: "Kelantan, Malaysia",
+                    description: "Known for crafting the Wau Bulan, a crescent moon-shaped kite that's a national symbol of Malaysia.",
+                    lat: 6.1257,
+                    lng: 102.2301,
+                    image: "picture/artisan_13.jpg"
+                },
+                {
+                    id: 14,
+                    name: "Hamir Soib",
+                    specialty: "Ceramic Artist",
+                    category: "pottery",
+                    state: "Kuala Lumpur",
+                    address: "Kuala Lumpur, Malaysia",
+                    description: "A multidisciplinary artist known for integrating pottery into his artwork, alongside his famous paintings.",
+                    lat: 3.1432,
+                    lng: 101.6953,
+                    image: "picture/artisan_14.jpg"
+                },
+                {
+                    id: 15,
+                    name: "Abdul Aziz bin Abdul Jamil",
+                    specialty: "Keris Maker",
+                    category: "metalwork",
+                    state: "Perak",
+                    address: "Kuala Kangsar, Perak, Malaysia",
+                    description: "Renowned for his craftsmanship in forging blades for royalty, including the King of Malaysia.",
+                    lat: 4.7631,
+                    lng: 101.0754,
+                    image: "picture/artisan_15.jpg"
+                }
+            ];
+            
+            // Group artisans by state for potential UI use
+            const artisansByState = {};
+            artisans.forEach(artisan => {
+                if (!artisansByState[artisan.state]) {
+                    artisansByState[artisan.state] = [];
+                }
+                artisansByState[artisan.state].push(artisan);
+            });
+            
+            // Navigation scroll effect and fixed header visibility
+            function handleScroll() {
+                const nav = document.querySelector('nav');
+                nav.classList.toggle('scrolled', window.scrollY > 100);
+                
+                // Show/hide the fixed header text
+                const headerHeight = document.getElementById('header').offsetHeight;
+                const fixedHeaderText = document.getElementById('fixed-header-text');
+                
+                if (window.scrollY > (headerHeight * 0.7)) {
+                    fixedHeaderText.classList.add('visible');
+                } else {
+                    fixedHeaderText.classList.remove('visible');
+                }
+            }
+            
+            window.addEventListener('scroll', handleScroll);
+            // Call once on load to set initial state
+            handleScroll();
+            
+            // Mobile menu functionality
+            menuToggle.addEventListener('click', function() {
+                const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                menuToggle.setAttribute('aria-expanded', !isExpanded);
+                navMenu.classList.toggle('active');
+                menuToggle.innerHTML = isExpanded ? 
+                    '<i class="fas fa-bars"></i>' : 
+                    '<i class="fas fa-times"></i>';
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('#menuToggle') && 
+                    !event.target.closest('#nav-menu') && 
+                    navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+            
+            // Initialize map centered on Malaysia
+            const map = L.map('map').setView([4.2105, 101.9758], 7);
+            
+            // Add tile layer (using OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
+            }).addTo(map);
+            
+            // Initialize marker cluster group
+            const markerCluster = L.markerClusterGroup({
+                showCoverageOnHover: false,
+                maxClusterRadius: 50,
+                iconCreateFunction: function(cluster) {
+                    return L.divIcon({
+                        html: `<div style="background: var(--gradient); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; border: 3px solid white; box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);">${cluster.getChildCount()}</div>`,
+                        className: 'custom-cluster-icon',
+                        iconSize: L.point(40, 40)
+                    });
+                }
+            });
+            
+            // Store all markers for filtering
+            let markers = [];
+            
+            // Get color based on category
+            function getCategoryColor(category) {
+                switch(category) {
+                    case 'pottery': return '#e67e22';
+                    case 'weaving': return '#3498db';
+                    case 'batik': return '#9b59b6';
+                    case 'woodworking': return '#8d6e63';
+                    case 'jewelry': return '#f1c40f';
+                    case 'metalwork': return '#95a5a6';
+                    case 'kite': return '#e74c3c';
+                    case 'traditional-art': return '#16a085';
+                    default: return '#2ecc71';
+                }
+            }
+            
+            // Get category icon
+            function getCategoryIcon(category) {
+                switch(category) {
+                    case 'pottery': return 'fas fa-vase';
+                    case 'weaving': return 'fas fa-vector-square';
+                    case 'batik': return 'fas fa-tshirt';
+                    case 'woodworking': return 'fas fa-tree';
+                    case 'jewelry': return 'fas fa-gem';
+                    case 'metalwork': return 'fas fa-hammer';
+                    case 'kite': return 'fas fa-wind';
+                    case 'traditional-art': return 'fas fa-mask';
+                    default: return 'fas fa-palette';
+                }
+            }
+            
+            // Custom icon for markers
+            function createCustomIcon(artisan) {
+                // Create artisan photo marker
+                return L.divIcon({
+                    className: `artisan-marker ${artisan.category}`,
+                    html: `
+                        <div style="position: relative; width: 100%; height: 100%;">
+                            <img src="${artisan.image}" alt="${artisan.name}" style="border: 3px solid ${getCategoryColor(artisan.category)};">
+                            <div class="marker-badge" style="background: ${getCategoryColor(artisan.category)};">
+                                <i class="${getCategoryIcon(artisan.category)}"></i>
+                            </div>
+                        </div>
+                    `,
+                    iconSize: [40, 40],
+                    iconAnchor: [20, 20],
+                    popupAnchor: [0, -20]
+                });
+            }
+            
+            // Add state labels
+            function addStateLabels() {
+                // Malaysian states with approximate central coordinates
+                const states = [
+                    { name: "Perlis", lat: 6.4417, lng: 100.1981 },
+                    { name: "Kedah", lat: 6.1184, lng: 100.3685 },
+                    { name: "Penang", lat: 5.4164, lng: 100.3327 },
+                    { name: "Perak", lat: 4.5921, lng: 101.0901 },
+                    { name: "Kelantan", lat: 5.3837, lng: 102.0412 },
+                    { name: "Terengganu", lat: 5.3117, lng: 103.1324 },
+                    { name: "Pahang", lat: 3.8126, lng: 103.3256 },
+                    { name: "Selangor", lat: 3.0738, lng: 101.5183 },
+                    { name: "Kuala Lumpur", lat: 3.1390, lng: 101.6869 },
+                    { name: "Putrajaya", lat: 2.9264, lng: 101.6964 },
+                    { name: "Negeri Sembilan", lat: 2.7258, lng: 102.2515 },
+                    { name: "Melaka", lat: 2.1896, lng: 102.2501 },
+                    { name: "Johor", lat: 1.4854, lng: 103.7618 },
+                    { name: "Sarawak", lat: 1.5533, lng: 110.3592 },
+                    { name: "Sabah", lat: 5.9788, lng: 116.0753 },
+                    { name: "Labuan", lat: 5.2830, lng: 115.2308 }
+                ];
+                
+                states.forEach(state => {
+                    // Add state label
+                    const hasArtisans = artisansByState[state.name] && artisansByState[state.name].length > 0;
+                    
+                    const stateLabel = L.marker([state.lat, state.lng], {
+                        icon: L.divIcon({
+                            className: 'state-label',
+                            html: `<div>${state.name}${hasArtisans ? ` <span style="color: var(--accent-color);">(${artisansByState[state.name] ? artisansByState[state.name].length : 0})</span>` : ''}</div>`,
+                            iconSize: [100, 20],
+                            iconAnchor: [50, 10]
+                        })
+                    }).addTo(map);
+                });
+            }
+            
+            // Add markers for each artisan
+            function addMarkers(filteredArtisans = artisans) {
+                // Clear existing markers and cluster
+                markerCluster.clearLayers();
+                markers = [];
+                
+                // Add new markers
+                filteredArtisans.forEach(artisan => {
+                    const marker = L.marker([artisan.lat, artisan.lng], {
+                        icon: createCustomIcon(artisan),
+                        alt: artisan.name
+                    });
+                    
+                    // Create custom popup content
+                    const popupContent = `
+                        <div class="custom-popup">
+                            <img src="${artisan.image}" alt="${artisan.name}" class="popup-image">
+                            <div class="popup-content">
+                                <div class="popup-name">${artisan.name}</div>
+                                <div class="popup-specialty">
+                                    <i class="${getCategoryIcon(artisan.category)}"></i>
+                                    ${artisan.specialty}
+                                </div>
+                                <div class="popup-tags">
+                                    <span class="popup-tag">${artisan.category.charAt(0).toUpperCase() + artisan.category.slice(1)}</span>
+                                    <span class="popup-tag">${artisan.state}</span>
+                                </div>
+                                <div class="popup-address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    ${artisan.address}
+                                </div>
+                                <div class="popup-description">${artisan.description}</div>
+                                <div>
+                                    <a href="artisans.html" class="view-artisan-btn">
+                                        <i class="fas fa-user"></i> View Profile
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    marker.bindPopup(popupContent, {
+                        className: 'custom-popup-container',
+                        maxWidth: 300,
+                        minWidth: 280
+                    });
+                    
+                    marker.artisanData = artisan; // Store artisan data in marker for filtering
+                    markers.push(marker);
+                    markerCluster.addLayer(marker);
+                    
+                    // Add tooltip for accessibility
+                    marker.on('mouseover', function(e) {
+                        if (!marker.isPopupOpen()) {
+                            showTooltip(e, `${artisan.name} - ${artisan.specialty}`);
+                        }
+                    });
+                    
+                    marker.on('mouseout', function() {
+                        hideTooltip();
+                    });
+                    
+                    marker.on('popupopen', function() {
+                        hideTooltip();
+                    });
+                });
+                
+                // Add cluster to map
+                map.addLayer(markerCluster);
+                
+                // If there are markers, fit bounds to show all
+                if (markers.length > 0) {
+                    const markerGroup = L.featureGroup(markers);
+                    map.fitBounds(markerGroup.getBounds(), {
+                        padding: [50, 50]
+                    });
+                }
+                
+                // Add state labels
+                addStateLabels();
+            }
+            
+            // Show tooltip
+            function showTooltip(e, text) {
+                const tooltipEl = document.getElementById('tooltip');
+                tooltipEl.textContent = text;
+                tooltipEl.style.left = `${e.originalEvent.pageX + 10}px`;
+                tooltipEl.style.top = `${e.originalEvent.pageY + 10}px`;
+                tooltipEl.classList.add('visible');
+            }
+            
+            // Hide tooltip
+            function hideTooltip() {
+                document.getElementById('tooltip').classList.remove('visible');
+            }
+            
+            // Filter markers by category
+            function filterMarkers(category) {
+                currentFilter = category;
+                
+                if (category === 'all') {
+                    addMarkers();
+                } else {
+                    const filtered = artisans.filter(artisan => artisan.category === category);
+                    addMarkers(filtered);
+                }
+            }
+            
+            // Initialize markers
+            addMarkers();
+            
+            // Filter button functionality
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active state
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
+                    });
+                    button.classList.add('active');
+                    button.setAttribute('aria-pressed', 'true');
+
+                    // Filter markers
+                    const filterValue = button.getAttribute('data-filter');
+                    filterMarkers(filterValue);
+                });
+            });
+            
+            // Search functionality with debounce
+            let searchTimeout;
+            searchInput.addEventListener('input', () => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    const searchTerm = searchInput.value.toLowerCase().trim();
+                    
+                    if (searchTerm === '') {
+                        // If search is empty, reset to current filter
+                        filterMarkers(currentFilter);
+                        return;
+                    }
+                    
+                    // Filter artisans by search term
+                    let filteredArtisans;
+                    
+                    if (currentFilter === 'all') {
+                        filteredArtisans = artisans.filter(artisan => 
+                            artisan.name.toLowerCase().includes(searchTerm) ||
+                            artisan.specialty.toLowerCase().includes(searchTerm) ||
+                            artisan.address.toLowerCase().includes(searchTerm) ||
+                            artisan.state.toLowerCase().includes(searchTerm) ||
+                            artisan.category.toLowerCase().includes(searchTerm) ||
+                            artisan.description.toLowerCase().includes(searchTerm)
+                        );
+                    } else {
+                        filteredArtisans = artisans.filter(artisan => 
+                            artisan.category === currentFilter &&
+                            (artisan.name.toLowerCase().includes(searchTerm) ||
+                            artisan.specialty.toLowerCase().includes(searchTerm) ||
+                            artisan.address.toLowerCase().includes(searchTerm) ||
+                            artisan.state.toLowerCase().includes(searchTerm) ||
+                            artisan.description.toLowerCase().includes(searchTerm))
+                        );
+                    }
+                    
+                    addMarkers(filteredArtisans);
+                }, 300);
+            });
+            
+            // "Find Artisans Near Me" functionality
+            locateMeBtn.addEventListener('click', function() {
+                // Show loading indicator
+                loadingIndicator.classList.add('active');
+                
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        // Success
+                        function(position) {
+                            const userLat = position.coords.latitude;
+                            const userLng = position.coords.longitude;
+                            
+                            // Check if user is in Malaysia (rough check)
+                            const inMalaysia = userLat > 1 && userLat < 7 && userLng > 99 && userLng < 120;
+                            
+                            if (!inMalaysia) {
+                                // If user is not in Malaysia, show nearest anyway but with a notice
+                                alert("You appear to be outside Malaysia. We'll still show the nearest Malaysian artisans to your location.");
+                            }
+                            
+                            // Center map on user location
+                            map.setView([userLat, userLng], 10);
+                            
+                            // Add user location marker
+                            const userMarker = L.marker([userLat, userLng], {
+                                icon: L.divIcon({
+                                    className: 'user-location-marker',
+                                    html: `<div style="width: 30px; height: 30px; background-color: #2ecc71; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 15px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;"><i class="fas fa-user" style="color: white; font-size: 12px;"></i></div>`,
+                                    iconSize: [30, 30],
+                                    iconAnchor: [15, 15]
+                                })
+                            }).addTo(map);
+                            
+                            userMarker.bindPopup("<div style='text-align: center;'><strong>Your Location</strong></div>").openPopup();
+                            
+                            // Calculate distance to each artisan
+                            const artisansWithDistance = artisans.map(artisan => {
+                                // Calculate distance (simple approximation)
+                                const distance = calculateDistance(
+                                    userLat, userLng,
+                                    artisan.lat, artisan.lng
+                                );
+                                
+                                return {
+                                    ...artisan,
+                                    distance: distance
+                                };
+                            });
+                            
+                            // Sort by distance
+                            artisansWithDistance.sort((a, b) => a.distance - b.distance);
+                            
+                            // Display nearest artisans panel
+                            displayNearestArtisans(artisansWithDistance.slice(0, 6));
+                            
+                            // Hide loading indicator
+                            loadingIndicator.classList.remove('active');
+                        },
+                        // Error
+                        function(error) {
+                            // Hide loading indicator
+                            loadingIndicator.classList.remove('active');
+                            
+                            alert("Unable to get your location. Please ensure location services are enabled.");
+                            console.error("Geolocation error:", error);
+                        },
+                        // Options
+                        {
+                            enableHighAccuracy: true,
+                            timeout: 10000,
+                            maximumAge: 0
+                        }
+                    );
+                } else {
+                    // Hide loading indicator
+                    loadingIndicator.classList.remove('active');
+                    alert("Geolocation is not supported by your browser.");
+                }
+            });
+            
+            // Calculate distance between two coordinates (Haversine formula)
+            function calculateDistance(lat1, lon1, lat2, lon2) {
+                const R = 6371; // Radius of the earth in km
+                const dLat = deg2rad(lat2 - lat1);
+                const dLon = deg2rad(lon2 - lon1);
+                const a = 
+                    Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+                    Math.sin(dLon/2) * Math.sin(dLon/2); 
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+                const distance = R * c; // Distance in km
+                return distance;
+            }
+            
+            function deg2rad(deg) {
+                return deg * (Math.PI/180);
+            }
+            
+            // Display nearest artisans panel
+            function displayNearestArtisans(nearestArtisans) {
+                // Clear previous results
+                artisanResults.innerHTML = '';
+                
+                if (nearestArtisans.length === 0) {
+                    artisanResults.innerHTML = `
+                        <div class="no-results">
+                            <i class="fas fa-map-marker-alt" style="font-size: 2rem; color: #e74c3c; margin-bottom: 1rem;"></i>
+                            <p>No artisans found near your location.</p>
+                        </div>
+                    `;
+                } else {
+                    // Add artisan result cards
+                    nearestArtisans.forEach(artisan => {
+                        const distanceText = artisan.distance < 1 
+                            ? `${Math.round(artisan.distance * 1000)} m` 
+                            : `${artisan.distance.toFixed(1)} km`;
+                            
+                        const resultCard = document.createElement('div');
+                        resultCard.className = 'artisan-result-card';
+                        resultCard.innerHTML = `
+                            <div class="result-img-container">
+                                <img src="${artisan.image}" alt="${artisan.name}" class="result-img">
+                                <div class="result-category-badge">${artisan.category.charAt(0).toUpperCase() + artisan.category.slice(1)}</div>
+                            </div>
+                            <div class="result-details">
+                                <div class="result-name">${artisan.name}</div>
+                                <div class="result-specialty">${artisan.specialty}</div>
+                                <div class="result-address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    ${artisan.address}
+                                </div>
+                                <div class="result-distance">
+                                    <i class="fas fa-route"></i>
+                                    ${distanceText} away
+                                </div>
+                            </div>
+                        `;
+                        
+                        // Click on result to show on map
+                        resultCard.addEventListener('click', () => {
+                            // Find corresponding marker
+                            const marker = markers.find(m => m.artisanData.id === artisan.id);
+                            if (marker) {
+                                map.setView([artisan.lat, artisan.lng], 14);
+                                markerCluster.zoomToShowLayer(marker, function() {
+                                    marker.openPopup();
+                                });
+                                
+                                // Optional: close panel on mobile
+                                if (window.innerWidth < 768) {
+                                    nearestPanel.classList.remove('active');
+                                }
+                            }
+                        });
+                        
+                        artisanResults.appendChild(resultCard);
+                    });
+                }
+                
+                // Show panel
+                nearestPanel.classList.add('active');
+            }
+            
+            // Close nearest artisans panel
+            closeNearest.addEventListener('click', function() {
+                nearestPanel.classList.remove('active');
+            });
+            
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Observe all sections with animation
+            document.querySelectorAll('.state-section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

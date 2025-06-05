@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meet the talented artisans of CraftGallery creating unique handmade crafts">
+    <meta name="keywords" content="artisans, craftspeople, handmade, traditional crafts">
+    <meta name="author" content="CraftGallery">
+    <title>CraftGallery - Artisans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6bdf;
+            --secondary-color: #9c3fe6;
+            --accent-color: #de2828;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --dark-color: #1c1d25;
+            --light-color: #f9f9ff;
+            --card-shadow: 0 10px 30px rgba(74, 107, 223, 0.08);
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-color);
+            color: #444;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Skip to main content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            z-index: 1001;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Enhanced Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        nav.scrolled .logo {
+            color: var(--primary-color);
+        }
+
+        .logo:hover {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav.scrolled a {
+            color: var(--dark-color);
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        nav.scrolled a:hover, nav.scrolled a.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        nav.scrolled .menu-toggle {
+            color: var(--primary-color);
+        }
+
+        /* Enhanced Header */
+        header {
+            background: var(--gradient);
+            min-height: 40vh;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 2rem 2rem; /* Changed from 2rem to include top padding */
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        /* Header decoration */
+        .header-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            opacity: 0.1;
+        }
+
+        .header-decoration-item {
+            position: absolute;
+            font-size: 8rem;
+            color: white;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .header-decoration-item:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .header-decoration-item:nth-child(2) {
+            top: 60%;
+            left: 20%;
+            animation-delay: 1s;
+        }
+
+        .header-decoration-item:nth-child(3) {
+            top: 20%;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .header-decoration-item:nth-child(4) {
+            top: 50%;
+            left: 80%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+            margin-bottom: 2rem;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .header-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-btn-primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .header-btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+
+        .header-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main content container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Enhanced filter section */
+        .filter-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--card-shadow);
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .filter-heading {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-heading i {
+            color: var(--primary-color);
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            border-radius: 30px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-btn i {
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        /* Featured section */
+        .featured-section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .featured-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            display: inline-block;
+            position: relative;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 4px;
+        }
+
+        .section-subtitle {
+            color: #666;
+            max-width: 800px;
+            margin: 1.5rem auto 0;
+        }
+
+        /* Artisans Grid */
+        .artisans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* Enhanced Artisan Card */
+        .artisan-card {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--card-shadow);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .artisan-card.hidden {
+            display: none;
+        }
+
+        .artisan-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(74, 107, 223, 0.2);
+        }
+
+        .artisan-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .artisan-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .artisan-card:hover .artisan-image img {
+            transform: scale(1.1);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 5;
+            box-shadow: 0 5px 15px rgba(222, 40, 40, 0.3);
+        }
+
+        .artisan-details {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .artisan-details h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .artisan-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .artisan-tag {
+            background: rgba(74, 107, 223, 0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .artisan-bio {
+            margin: 1rem 0;
+            flex-grow: 1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .artisan-meta {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .artisan-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-right: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: #555;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        .view-profile-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.1);
+            margin-top: auto;
+            align-self: flex-start;
+        }
+
+        .view-profile-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 107, 223, 0.2);
+        }
+
+        /* All Artisans Section */
+        .all-artisans-section {
+            margin-bottom: 5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .all-artisans-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 4rem;
+        }
+
+        .pagination-container {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .page-btn.text {
+            width: auto;
+            padding: 0 1rem;
+            border-radius: 20px;
+        }
+
+        .page-btn:hover, .page-btn.active {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        .page-divider {
+            color: #777;
+            font-weight: 500;
+        }
+
+        /* Join section */
+        .join-section {
+            margin: 6rem auto 4rem;
+            max-width: 1200px;
+            padding: 4rem;
+            background: var(--gradient);
+            border-radius: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+            text-align: center;
+        }
+
+        .join-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .join-decoration {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .join-decoration:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -100px;
+        }
+
+        .join-decoration:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            right: -50px;
+        }
+
+        .join-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .join-text {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .join-btn {
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .join-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Enhanced Modal */
+        .artisan-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .artisan-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            animation: fadeInUp 0.5s ease-out;
+            background: rgba(12, 12, 20, 0.7);
+            border-radius: 20px;
+            padding: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-main {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .modal-image-container {
+            flex: 1.5;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            max-height: 70vh;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .modal-info {
+            flex: 1;
+            color: white;
+            padding: 0 0 0 1rem;
+        }
+
+        .modal-info h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: white;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .modal-info h3:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient);
+            bottom: 0;
+            left: 0;
+            border-radius: 3px;
+        }
+
+        .modal-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-tag {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .modal-info p {
+            margin: 0 0 1.5rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .modal-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 0;
+        }
+
+        .modal-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .modal-meta-label {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .modal-meta-value {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .modal-social {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .modal-social a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .modal-social a:hover {
+            background: var(--gradient);
+            transform: translateY(-3px);
+        }
+
+        .modal-actions-bottom {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .modal-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 2100;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: none;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Enhanced Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-about {
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-logo i {
+            font-size: 2.2rem;
+            -webkit-text-fill-color: initial;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-about p {
+            color: #ddd;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-social a:hover {
+            background: var(--gradient);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a i {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            text-align: center;
+            color: #ddd;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 900;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .modal-main {
+                flex-direction: column;
+            }
+
+            .modal-image-container {
+                max-height: 50vh;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .artisans-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header { min-height: 30vh; }
+            .header-content h1 { font-size: 2.5rem; }
+            .nav-container { padding: 0.5rem 1rem; }
+            .header-buttons { flex-direction: column; gap: 1rem; }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav.scrolled .menu-toggle { color: var(--primary-color); }
+            
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.5rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 1010;
+            }
+            
+            nav ul.active { transform: translateY(0); }
+            nav a { color: var(--dark-color); }
+            
+            .artisans-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-buttons {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .join-section {
+                padding: 2rem;
+            }
+
+            .search-container {
+                margin-bottom: 1rem;
+            }
+
+            .modal-info h3 {
+                font-size: 1.8rem;
+            }
+
+            .modal-actions-bottom {
+                flex-direction: column;
+            }
+
+            .modal-btn {
+                text-align: center;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-toggle { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Back to top button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <nav role="navigation">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-palette"></i> CraftGallery
+            </a>
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="artisans.html" class="active" aria-current="page"><i class="fas fa-user-friends"></i> Artisans</a></li>
+                <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="tutorials.html"><i class="fas fa-book-open"></i> Tutorials</a></li>
+                <li><a href="reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+                <li><a href="map.html"><i class="fas fa-map-marked-alt"></i> Map</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header role="banner">
+        <div class="header-decoration">
+            <div class="header-decoration-item"><i class="fas fa-palette"></i></div>
+            <div class="header-decoration-item"><i class="fas fa-paint-brush"></i></div>
+            <div class="header-decoration-item"><i class="fas fa-vase"></i></div>
+            <div class="header-decoration-item"><i class="fas fa-scroll"></i></div>
+        </div>
+        <div class="header-content">
+            <h1>Our Talented Artisans</h1>
+            <p>Discover the skilled craftspeople behind our unique creations and explore the rich cultural heritage of Malaysian craftsmanship.</p>
+            <div class="header-buttons">
+                <a href="#featured-artisans" class="header-btn header-btn-primary">
+                    <i class="fas fa-crown"></i> Featured Artisans
+                </a>
+                
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="main-container">
+        <section class="filter-container" aria-labelledby="filter-heading">
+            <h2 id="filter-heading" class="filter-heading">
+                <i class="fas fa-filter"></i> Explore Our Artisans
+            </h2>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="search-input" placeholder="Search by name, specialty, or location..." aria-label="Search artisans">
+                <span class="search-icon" aria-hidden="true">
+                    <i class="fas fa-search"></i>
+                </span>
+            </div>
+            
+            <div class="filter-buttons" role="radiogroup" aria-label="Filter artisans by category">
+                <button class="filter-btn active" data-filter="all" role="radio" aria-checked="true">
+                    <i class="fas fa-border-all"></i> All
+                </button>
+                <button class="filter-btn" data-filter="pottery" role="radio" aria-checked="false">
+                    <i class="fas fa-vase"></i> Pottery
+                </button>
+                <button class="filter-btn" data-filter="weaving" role="radio" aria-checked="false">
+                    <i class="fas fa-vector-square"></i> Weaving
+                </button>
+                <button class="filter-btn" data-filter="batik" role="radio" aria-checked="false">
+                    <i class="fas fa-tshirt"></i> Batik
+                </button>
+                <button class="filter-btn" data-filter="woodworking" role="radio" aria-checked="false">
+                    <i class="fas fa-tree"></i> Woodworking
+                </button>
+                <button class="filter-btn" data-filter="jewelry" role="radio" aria-checked="false">
+                    <i class="fas fa-gem"></i> Jewelry
+                </button>
+                <button class="filter-btn" data-filter="metalwork" role="radio" aria-checked="false">
+                    <i class="fas fa-hammer"></i> Metalwork
+                </button>
+                <button class="filter-btn" data-filter="kite" role="radio" aria-checked="false">
+                    <i class="fas fa-wind"></i> Kite Making
+                </button>
+            </div>
+        </section>
+
+        <!-- Featured Artisans Section -->
+        <section id="featured-artisans" class="featured-section">
+            <div class="section-header">
+                <h2 class="section-title">Featured Artisans</h2>
+                <p class="section-subtitle">Highlighting exceptional Malaysian craftspeople who have mastered traditional techniques and are preserving cultural heritage through their art.</p>
+            </div>
+            
+            <div class="artisans-grid" role="list">
+                <!-- Artisan 1: Ruwaida Baharudin -->
+                <div class="artisan-card woodworking" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/ruwaida baharudin.jpg" alt="Ruwaida Baharudin, a woman woodcarver working on a wooden sculpture" loading="lazy">
+                        <div class="featured-badge">Featured</div>
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Ruwaida Baharudin</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Woodworking</span>
+                            <span class="artisan-tag">Master Craftsperson</span>
+                        </div>
+                        <p class="artisan-bio">A Malaysian woodcarver with over 10 years of experience, recognized for her contributions to the art form and dedication to preserving traditional carving techniques.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Ruwaida's Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Ruwaida's LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Ruwaida's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="https://www.instagram.com/mieyda_/" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Artisan 2: Toh Puan Dato' Seri Hajjah Dr. Aishah Ong -->
+                <div class="artisan-card batik" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_2.jpg" alt="Toh Puan Dato' Seri Hajjah Dr. Aishah Ong creating batik patterns on fabric" loading="lazy">
+                        <div class="featured-badge">Featured</div>
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Toh Puan Dato' Seri Hajjah Dr. Aishah Ong</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Batik</span>
+                            <span class="artisan-tag">Songket</span>
+                        </div>
+                        <p class="artisan-bio">While better known as a patron of crafts, she's closely associated with promoting Malaysian artisans, especially in batik and songket. Her influence has elevated artisans like those from Yayasan Tuanku Nur Zahirah, making their work iconic.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kuala Lumpur, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Aishah's Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Aishah's LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Aishah's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Artisan 3: Pak Shafie -->
+                <div class="artisan-card kite" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_3.jpg" alt="A legendary kite maker from Kelantan" loading="lazy">
+                        <div class="featured-badge">Featured</div>
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Pak Shafie</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Kite Making</span>
+                            <span class="artisan-tag">Traditional Arts</span>
+                        </div>
+                        <p class="artisan-bio">Known for crafting traditional "Wau" kites, especially the Wau Bulan. He's been making these intricate, colorful kites by hand for decades along the east coast. His workshop in Kelantan is a cultural landmark, and he's often featured in tourism promotions.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kelantan, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Pak's Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Pak's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Artisans Section -->
+        <section id="all-artisans" class="all-artisans-section">
+            <div class="section-header">
+                <h2 class="section-title">All Artisans</h2>
+                <p class="section-subtitle">Browse our complete collection of talented artisans from across Malaysia, each bringing unique skills and perspectives to their craft.</p>
+            </div>
+            
+            <div class="artisans-grid" role="list">
+                <!-- Artisan 4: Tengku Marina Ibrahim -->
+                <div class="artisan-card weaving" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_4.jpg" alt="The founder of Tanoti Crafts in Sarawak" loading="lazy">
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Tengku Marina Ibrahim</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Weaving</span>
+                            <span class="artisan-tag">Songket</span>
+                        </div>
+                        <p class="artisan-bio">She's a master songket weaver preserving the art of weaving gold-threaded textiles. Her hands-on work with Tanoti's artisans has revived this royal craft, and she's frequently photographed at workshops or exhibitions in Kuching.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Sarawak, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Tengku's Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Tengku's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Artisan 5: Rozana Musa -->
+                <div class="artisan-card pottery" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_5.jpg" alt="A ceramicist from Malacca" loading="lazy">
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Rozana Musa</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Pottery</span>
+                            <span class="artisan-tag">Ceramics</span>
+                        </div>
+                        <p class="artisan-bio">Her minimalist yet functional pieces reflect a modern take on traditional pottery. She's active in the craft community, and her works are often showcased (and pictured) in Malaysian art and dining circles.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Melaka, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Rozana's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Rozana's Pinterest">
+                                <i class="fab fa-pinterest-p"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Artisan 6: Lee Chee Cheng -->
+                <div class="artisan-card woodworking" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_6.jpg" alt="A master woodcarver from Penang" loading="lazy">
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Lee Chee Cheng</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Woodworking</span>
+                            <span class="artisan-tag">Traditional</span>
+                        </div>
+                        <p class="artisan-bio">Known for carving traditional Chinese signboards with Jelutong wood and gold leaf. Based at Sung Dynasty Wood Carving on Carnavon Street, his meticulous craft is a dying art, and he's been featured in heritage articles with clear images of him at work.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Penang, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Lee's Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Lee's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Artisan 7: Norhaiza Noordin -->
+                <div class="artisan-card traditional-art" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_7.jpg" alt="Norhaiza Noordin creating a shadow puppet figure" loading="lazy">
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Norhaiza Noordin</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Shadow Puppets</span>
+                            <span class="artisan-tag">Traditional Arts</span>
+                        </div>
+                        <p class="artisan-bio">A dedicated shadow puppet craftsman from Kelantan who has modernized traditional wayang kulit patterns. His intricate carvings preserve Malaysian cultural heritage while making the art form accessible to new generations.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kelantan, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Norhaiza's Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Norhaiza's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Artisan 8: Asmah Ismail -->
+                <div class="artisan-card weaving" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_8.jpg" alt="Asmah Ismail weaving intricate pandan leaf products" loading="lazy">
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Asmah Ismail</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Weaving</span>
+                            <span class="artisan-tag">Pandan Craft</span>
+                        </div>
+                        <p class="artisan-bio">A renowned pandan weaver from Sarawak who transforms this versatile leaf into exquisite mats, baskets, and decorative items. Her commitment to sustainable crafts has inspired a revival of interest in this traditional skill.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Sarawak, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Asmah's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Asmah's Pinterest">
+                                <i class="fab fa-pinterest-p"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Artisan 9: Mohd Daud bin Yusoff -->
+                <div class="artisan-card jewelry metalwork" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_9.jpg" alt="Mohd Daud bin Yusoff crafting silver jewelry in his workshop" loading="lazy">
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Mohd Daud bin Yusoff (Pak Daud)</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Silversmith</span>
+                            <span class="artisan-tag">Jewelry</span>
+                        </div>
+                        <p class="artisan-bio">A master silversmith from Kelantan who blends traditional Malay motifs with contemporary designs. His intricate filigree work has been featured in international exhibitions, bringing global attention to Malaysian metalcraft.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kota Bharu, Kelantan, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Daud's Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Daud's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Artisan 10: Siti Zainon Ismail -->
+                <div class="artisan-card batik" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_10.jpg" alt="Siti Zainon Ismail creating intricate batik designs" loading="lazy">
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Siti Zainon Ismail</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Batik</span>
+                            <span class="artisan-tag">Textile Arts</span>
+                        </div>
+                        <p class="artisan-bio">An accomplished batik artist, cultural anthropologist, and writer from Terengganu. Her innovative designs incorporate traditional elements with abstract forms, creating a unique aesthetic that has transformed contemporary Malaysian batik.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Terengganu, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Siti's Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Siti's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Artisan 11: Haja Mohideen Mohammed Shariff -->
+                <div class="artisan-card traditional-art" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_11.jpg" alt="Haja Mohideen Mohammed Shariff working on a headwear piece" loading="lazy">
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Haja Mohideen Mohammed Shariff</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Songkok</span>
+                            <span class="artisan-tag">Traditional Crafts</span>
+                        </div>
+                        <p class="artisan-bio">At 69, Haja Mohideen is one of the last traditional songkok makers in Penang, handcrafting these Malay headgear pieces since 1974. His family legacy (started by his father in 1936) includes making songkoks for notable figures like the Raja of Perlis and Tun Dr. Mahathir.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Penang, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Haja's Website">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Haja's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Artisan 12: Nik Rashiddin Nik Hussein -->
+                <div class="artisan-card woodworking" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_12.jpg" alt="Nik Rashiddin Nik Hussein carving intricate wooden designs" loading="lazy">
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Nik Rashiddin Nik Hussein</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Woodcarving</span>
+                            <span class="artisan-tag">Traditional Arts</span>
+                        </div>
+                        <p class="artisan-bio">A master woodcarver from Kelantan known for his exquisite carvings of traditional house components, furniture, and decorative items. His legacy lives on through his students who continue to preserve the Malay woodcarving tradition.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kelantan, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Nik's Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Nik's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Artisan 13: Abdul Rahman Abu Bakar -->
+                <div class="artisan-card kite" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_13.jpg" alt="Abdul Rahman Abu Bakar creating a traditional kite" loading="lazy">
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Abdul Rahman Abu Bakar (Pak Rahman)</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Kite Making</span>
+                            <span class="artisan-tag">Wau Bulan</span>
+                        </div>
+                        <p class="artisan-bio">Known for crafting the Wau Bulan, a crescent moon-shaped kite that's a national symbol of Malaysia. His intricate designs, often featuring vibrant floral patterns, are celebrated at cultural festivals and competitions across the country.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kelantan, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Rahman's Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Rahman's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Artisan 14: Hamir Soib -->
+                <div class="artisan-card pottery" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_14.jpg" alt="Hamir Soib creating pottery" loading="lazy">
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Hamir Soib</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Ceramics</span>
+                            <span class="artisan-tag">Contemporary</span>
+                        </div>
+                        <p class="artisan-bio">A multidisciplinary artist known for integrating pottery into his artwork, alongside his famous paintings. His ceramic pieces, often bold and artistic, have been exhibited in galleries across Malaysia. His dual expertise makes him a standout in the craft scene.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kuala Lumpur, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Hamir's Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Hamir's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Artisan 15: Abdul Aziz bin Abdul Jamil -->
+                <div class="artisan-card metalwork" role="listitem" tabindex="0">
+                    <div class="artisan-image">
+                        <img src="picture/artisan_15.jpg" alt="Abdul Aziz bin Abdul Jamil forging a keris blade" loading="lazy">
+                    </div>
+                    <div class="artisan-details">
+                        <h3 class="artisan-name">Abdul Aziz bin Abdul Jamil (Pak Mazin)</h3>
+                        <div class="artisan-tags">
+                            <span class="artisan-tag">Keris Making</span>
+                            <span class="artisan-tag">Metalwork</span>
+                        </div>
+                        <p class="artisan-bio">Renowned for his craftsmanship in forging blades for royalty, including the King of Malaysia. Starting at age 10 and mastering the craft by 16, he uses traditional methods—hammering and folding metal 21 times with seven metals symbolizing protection and unity.</p>
+                        <div class="artisan-meta">
+                            <span class="artisan-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kuala Kangsar, Perak, Malaysia
+                            </span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Abdul's Website">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Abdul's Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="view-profile-btn">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination" role="navigation" aria-label="Pagination">
+                <div class="pagination-container">
+                    <button class="page-btn" aria-label="First page"><i class="fas fa-angle-double-left"></i></button>
+                    <button class="page-btn" aria-label="Previous page"><i class="fas fa-angle-left"></i></button>
+                    <button class="page-btn active" aria-current="page">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <span class="page-divider">...</span>
+                    <button class="page-btn">5</button>
+                    <button class="page-btn" aria-label="Next page"><i class="fas fa-angle-right"></i></button>
+                    <button class="page-btn" aria-label="Last page"><i class="fas fa-angle-double-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+
+
+    <!-- Artisan Modal -->
+    <div class="artisan-modal" id="artisan-modal" role="dialog" aria-label="Artisan details">
+        <div class="modal-content">
+            <button class="close-modal" tabindex="0" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-main">
+                <div class="modal-image-container">
+                    <img src="" alt="" id="modal-img" class="modal-image">
+                </div>
+                
+                <div class="modal-info">
+                    <h3 id="modal-name"></h3>
+                    <div class="modal-tags" id="modal-tags">
+                        <!-- Tags will be added dynamically -->
+                    </div>
+                    
+                    <p id="modal-bio"></p>
+                    
+                    <div class="modal-meta">
+                        <div class="modal-meta-item">
+                            <div class="modal-meta-label">Location</div>
+                            <div class="modal-meta-value" id="modal-location"></div>
+                        </div>
+                        <div class="modal-meta-item">
+                            <div class="modal-meta-label">Years Active</div>
+                            <div class="modal-meta-value">10+ years</div>
+                        </div>
+                        <div class="modal-meta-item">
+                            <div class="modal-meta-label">Materials</div>
+                            <div class="modal-meta-value">Traditional & natural</div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-social" id="modal-social">
+                        <!-- Social links will be added dynamically -->
+                    </div>
+                    
+                    <div class="modal-actions-bottom">
+                        <a href="#" class="modal-btn modal-btn-primary">
+                            <i class="fas fa-envelope"></i> Contact Artisan
+                        </a>
+                        <a href="#" class="modal-btn modal-btn-secondary">
+                            <i class="fas fa-shopping-bag"></i> View Products
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <i class="fas fa-palette"></i> CraftGallery
+                </div>
+                <p>Celebrating and preserving Malaysia's rich crafting traditions through our curated collection of artisan masterpieces.</p>
+               
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-angle-right"></i> Home</a></li>
+                    <li><a href="artisans.html"><i class="fas fa-angle-right"></i> Artisans</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-angle-right"></i> Gallery</a></li>
+                    <li><a href="tutorials.html"><i class="fas fa-angle-right"></i> Tutorials</a></li>
+                    <li><a href="contact.html"><i class="fas fa-angle-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="footer-links">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Alor Setar,Kedah, Malaysia</a></li>
+                    <li><a href="#"><i class="fas fa-phone"></i> +60 11-37575698</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> muhdfayyadh256@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2025 CraftGallery. All rights reserved. Supporting Malaysian artisans and cultural heritage.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Observe all sections
+            document.querySelectorAll('.featured-section, .all-artisans-section, .join-section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Back to top button
+            const backToTopBtn = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                // Navigation scroll effect
+                document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 100);
+                
+                // Back to top visibility
+                backToTopBtn.classList.toggle('visible', window.scrollY > 500);
+            });
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Mobile menu
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            menuToggle.addEventListener('click', () => {
+                const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                navMenu.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', !isExpanded);
+                menuToggle.innerHTML = isExpanded ? 
+                    '<i class="fas fa-bars"></i>' : 
+                    '<i class="fas fa-times"></i>';
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('nav') && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active state
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-checked', 'false');
+                    });
+                    button.classList.add('active');
+                    button.setAttribute('aria-checked', 'true');
+
+                    const filterValue = button.getAttribute('data-filter');
+                    const artisanCards = document.querySelectorAll('.artisan-card');
+
+                    // Filter cards
+                    artisanCards.forEach(card => {
+                        const shouldShow = filterValue === 'all' || card.classList.contains(filterValue);
+                        card.classList.toggle('hidden', !shouldShow);
+                    });
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('search-input');
+            
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                
+                if (searchTerm === '') {
+                    // Reset to default view
+                    document.querySelector('.filter-btn[data-filter="all"]').click();
+                    return;
+                }
+                
+                // Search through all cards
+                const artisanCards = document.querySelectorAll('.artisan-card');
+                
+                artisanCards.forEach(card => {
+                    const name = card.querySelector('.artisan-name').textContent.toLowerCase();
+                    const bio = card.querySelector('.artisan-bio').textContent.toLowerCase();
+                    const tags = Array.from(card.querySelectorAll('.artisan-tag'))
+                        .map(tag => tag.textContent.toLowerCase());
+                    const location = card.querySelector('.artisan-meta-item')?.textContent.toLowerCase() || '';
+                    
+                    const matches = name.includes(searchTerm) || 
+                                   bio.includes(searchTerm) || 
+                                   tags.some(tag => tag.includes(searchTerm)) ||
+                                   location.includes(searchTerm);
+                    
+                    card.classList.toggle('hidden', !matches);
+                });
+            });
+
+            // Pagination
+            const pageButtons = document.querySelectorAll('.page-btn');
+            pageButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (button.classList.contains('active')) return;
+                    
+                    pageButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.removeAttribute('aria-current');
+                    });
+                    
+                    if (!button.querySelector('i')) {
+                        button.classList.add('active');
+                        button.setAttribute('aria-current', 'page');
+                    }
+                    
+                    // Scroll to top of gallery container
+                    document.getElementById('all-artisans').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Modal functionality
+            const modal = document.getElementById('artisan-modal');
+            const modalImg = document.getElementById('modal-img');
+            const modalName = document.getElementById('modal-name');
+            const modalBio = document.getElementById('modal-bio');
+            const modalLocation = document.getElementById('modal-location');
+            const modalTags = document.getElementById('modal-tags');
+            const modalSocial = document.getElementById('modal-social');
+            const closeModal = document.querySelector('.close-modal');
+
+            // Open modal function
+            function openModal(artisanCard) {
+                // Get data from card
+                const img = artisanCard.querySelector('.artisan-image img');
+                const name = artisanCard.querySelector('.artisan-name').textContent;
+                const bio = artisanCard.querySelector('.artisan-bio').textContent;
+                const location = artisanCard.querySelector('.artisan-meta-item').textContent.trim();
+                
+                // Get tags
+                const tags = Array.from(artisanCard.querySelectorAll('.artisan-tag'))
+                    .map(tag => tag.textContent);
+                
+                // Update modal content
+                modalImg.src = img.src;
+                modalImg.alt = img.alt;
+                modalName.textContent = name;
+                modalBio.textContent = bio;
+                modalLocation.textContent = location.replace(/^\s*\S+\s*/, ''); // Remove icon
+                
+                // Generate tags
+                modalTags.innerHTML = '';
+                tags.forEach(tag => {
+                    const tagEl = document.createElement('span');
+                    tagEl.className = 'modal-tag';
+                    tagEl.textContent = tag;
+                    modalTags.appendChild(tagEl);
+                });
+                
+                // Clone social links
+                const socialLinks = artisanCard.querySelector('.social-links').cloneNode(true);
+                modalSocial.innerHTML = '';
+                modalSocial.appendChild(socialLinks);
+                
+                // Show modal
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                closeModal.focus();
+            }
+
+            // Attach click event to all artisan cards
+            document.querySelectorAll('.artisan-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    // Don't open modal if clicking view profile button
+                    if (!e.target.closest('.view-profile-btn')) {
+                        openModal(card);
+                    }
+                });
+                
+                // Keyboard accessibility
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openModal(card);
+                    }
+                });
+            });
+
+            // Close modal events
+            closeModal.addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (modal.classList.contains('active') && e.key === 'Escape') {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

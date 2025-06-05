@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read and submit reviews for CraftGallery's artisan products and services">
+    <meta name="keywords" content="craft reviews, artisan feedback, CraftGallery testimonials">
+    <meta name="author" content="CraftGallery">
+    <title>CraftGallery - Reviews</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6bdf;
+            --secondary-color: #9c3fe6;
+            --accent-color: #de2828;
+            --bright-accent: #FF9C1A;
+            --cheerful-green: #22DD9B;
+            --playful-pink: #FF6B9F;
+            --dark-color: #1c1d25;
+            --light-color: #f9f9ff;
+            --card-shadow: 0 10px 30px rgba(74, 107, 223, 0.08);
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-color);
+            color: #444;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234a6bdf' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+        }
+
+        /* Skip to main content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            z-index: 1001;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Enhanced Navigation - Aligned with homepage */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        nav.scrolled .logo {
+            color: var(--primary-color);
+        }
+
+        .logo:hover {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav.scrolled a {
+            color: var(--dark-color);
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        nav.scrolled a:hover, nav.scrolled a.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        nav.scrolled .menu-toggle {
+            color: var(--primary-color);
+        }
+
+        /* Improved header to make text stay visible */
+        header.review-header {
+            min-height: 50vh;
+            background: var(--gradient);
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            padding-top: 80px; /* Added to account for fixed navbar */
+        }
+
+        .header-content {
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header-content p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Fixed header text that stays visible */
+        .fixed-header-text {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            z-index: 990;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .fixed-header-text.visible {
+            transform: translateY(0);
+        }
+
+        .fixed-header-text h2 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(74, 107, 223, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(74, 107, 223, 0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+            padding: 4rem 2rem;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .review-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(74, 107, 223, 0.2);
+        }
+
+        .rating {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .review-meta {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 1rem;
+        }
+
+        .review-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .star {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .star.filled, .star:hover, .star:hover ~ .star {
+            color: #ffd700;
+        }
+
+        .success-message {
+            background: #e7f9e7;
+            color: #2e7d32;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+            text-align: center;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+            text-align: center;
+        }
+
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 1rem;
+            padding: 0 2rem;
+        }
+
+        .reviews-header select {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 2px solid #eee;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .review-count {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        .view-more {
+            display: block;
+            margin: 2rem auto;
+            padding: 0.8rem 2rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(74, 107, 223, 0.2);
+        }
+
+        .view-more:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(74, 107, 223, 0.3);
+        }
+
+        .no-reviews {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #777;
+            padding: 2rem;
+        }
+
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-logo i {
+            font-size: 2.2rem;
+            -webkit-text-fill-color: initial;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a i {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            text-align: center;
+            color: #ddd;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 { font-size: 2.5rem; }
+            .nav-container { padding: 0.5rem 1rem; }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav.scrolled .menu-toggle { color: var(--primary-color); }
+            
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.5rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 1010;
+            }
+            
+            nav ul.active { transform: translateY(0); }
+            nav a { color: var(--dark-color); }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-header { 
+                flex-direction: column; 
+                gap: 1rem; 
+            }
+
+            .fixed-header-text {
+                top: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav role="navigation">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-palette"></i> CraftGallery
+            </a>
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="artisans.html"><i class="fas fa-user-friends"></i> Artisans</a></li>
+                <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="tutorials.html"><i class="fas fa-book-open"></i> Tutorials</a></li>
+                <li><a href="#" class="active" aria-current="page"><i class="fas fa-star"></i> Reviews</a></li>
+                <li><a href="map.html"><i class="fas fa-map-marked-alt"></i> Map</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Fixed header text that stays visible on scroll -->
+    <div class="fixed-header-text" id="fixed-header-text">
+        <h2>Reviews - Share your experience with CraftGallery</h2>
+    </div>
+
+    <header class="review-header" role="banner" id="header">
+        <div class="header-content">
+            <h1 id="main-content">Reviews</h1>
+            <p>Share your experience with CraftGallery</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="reviews">
+            <div class="reviews-header">
+                <select id="sort-reviews" aria-label="Sort reviews">
+                    <option value="date-desc">Newest First</option>
+                    <option value="date-asc">Oldest First</option>
+                    <option value="rating-desc">Highest Rated</option>
+                    <option value="rating-asc">Lowest Rated</option>
+                </select>
+                <span class="review-count" id="review-count"></span>
+            </div>
+            <div class="grid" role="list" id="reviews-grid">
+                <!-- Review cards will be dynamically loaded here -->
+            </div>
+            <button class="view-more" id="view-more" style="display: none;">View More</button>
+        </section>
+
+        <div class="review-form">
+            <h2>Leave a Review</h2>
+            <div class="success-message" id="success-message">
+                Thank you for your review! It has been submitted successfully.
+            </div>
+            <div class="error-message" id="error-message">
+                Please fill out all fields and select a rating.
+            </div>
+            <form id="review-form" aria-label="Submit a review">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="star-rating" role="radiogroup" aria-label="Select rating">
+                        <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="0">★</span>
+                        <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="0">★</span>
+                        <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="0">★</span>
+                        <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="0">★</span>
+                        <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="0">★</span>
+                    </div>
+                    <input type="hidden" id="rating-value" value="0" aria-hidden="true">
+                </div>
+                <div class="form-group">
+                    <label for="title">Review Title</label>
+                    <input type="text" id="title" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="review">Your Review</label>
+                    <textarea id="review" required aria-required="true"></textarea>
+                </div>
+                <button type="submit" class="cta-button">Submit Review</button>
+            </form>
+        </div>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <i class="fas fa-palette"></i> CraftGallery
+                </div>
+                <p>Read and share reviews about our artisan crafts.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Alor Setar,Kedah, Malaysia</a></li>
+                    <li><a href="tel:+601137575698"><i class="fas fa-phone"></i> +60 1137575698</a></li>
+                    <li><a href="mailto:muhdfayyadh256@gmail.com"><i class="fas fa-envelope"></i> muhdfayyadh256@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        </div>
+        <div class="copyright">
+            © 2025 CraftGallery. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('scrolled', window.scrollY > 100);
+            
+            // Show/hide the fixed header text
+            const headerHeight = document.getElementById('header').offsetHeight;
+            const fixedHeaderText = document.getElementById('fixed-header-text');
+            
+            if (window.scrollY > (headerHeight * 0.7)) {
+                fixedHeaderText.classList.add('visible');
+            } else {
+                fixedHeaderText.classList.remove('visible');
+            }
+        });
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            navMenu.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            menuToggle.innerHTML = isExpanded ? 
+                '<i class="fas fa-bars"></i>' : 
+                '<i class="fas fa-times"></i>';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav') && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // Section visibility
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+        // Star rating
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('rating-value');
+        let selectedRating = 0;
+
+        stars.forEach(star => {
+            star.addEventListener('mouseover', () => {
+                const rating = star.dataset.value;
+                stars.forEach(s => {
+                    s.classList.toggle('filled', s.dataset.value <= rating);
+                });
+            });
+
+            star.addEventListener('mouseout', () => {
+                stars.forEach(s => {
+                    s.classList.toggle('filled', s.dataset.value <= selectedRating);
+                });
+            });
+
+            star.addEventListener('click', () => {
+                selectedRating = star.dataset.value;
+                ratingInput.value = selectedRating;
+                stars.forEach(s => {
+                    s.setAttribute('aria-checked', s.dataset.value === selectedRating);
+                });
+            });
+
+            star.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    selectedRating = star.dataset.value;
+                    ratingInput.value = selectedRating;
+                    stars.forEach(s => {
+                        s.setAttribute('aria-checked', s.dataset.value === selectedRating);
+                    });
+                }
+            });
+        });
+
+        // Local Storage Functions
+        const REVIEWS_STORAGE_KEY = 'craftgallery_reviews';
+        const INITIAL_DISPLAY_COUNT = 8;
+        const LOAD_MORE_COUNT = 4;
+        let displayedCount = INITIAL_DISPLAY_COUNT;
+
+        // Check if localStorage is available
+        function storageAvailable(type) {
+            try {
+                const storage = window[type];
+                const x = '__storage_test__';
+                storage.setItem(x, x);
+                storage.removeItem(x);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // Initialize with default reviews if none exist
+        function initializeDefaultReviews() {
+            if (!storageAvailable('localStorage')) {
+                console.error('localStorage is not available');
+                return;
+            }
+
+            const defaultReviews = [
+                {
+                    name: 'Sarah M.',
+                    rating: 5,
+                    title: 'Beautiful Craftsmanship',
+                    review: 'The pottery I purchased exceeded my expectations! The quality and attention to detail are amazing.',
+                    date: 'February 15, 2025'
+                },
+                {
+                    name: 'John D.',
+                    rating: 4,
+                    title: 'Great Selection',
+                    review: 'Loved the variety of woven items. Shipping was fast, though packaging could be improved.',
+                    date: 'February 10, 2025'
+                },
+                {
+                    name: 'Emma L.',
+                    rating: 5,
+                    title: 'Excellent Service',
+                    review: 'The customer service was outstanding. They helped me find exactly what I was looking for.',
+                    date: 'January 28, 2025'
+                },
+                {
+                    name: 'Mark T.',
+                    rating: 5,
+                    title: 'Unique Items',
+                    review: 'I\'ve been looking for artisanal woodwork like this for ages. Finally found what I wanted!',
+                    date: 'January 15, 2025'
+                }
+            ];
+            
+            if (!localStorage.getItem(REVIEWS_STORAGE_KEY)) {
+                localStorage.setItem(REVIEWS_STORAGE_KEY, JSON.stringify(defaultReviews));
+            }
+        }
+
+        // Save review to local storage
+        function saveReview(reviewData) {
+            if (!storageAvailable('localStorage')) {
+                console.error('Cannot save review: localStorage is not available');
+                return;
+            }
+
+            let reviews = getReviews();
+            reviews.unshift(reviewData);
+            localStorage.setItem(REVIEWS_STORAGE_KEY, JSON.stringify(reviews));
+        }
+
+        // Get all reviews from local storage
+        function getReviews() {
+            if (!storageAvailable('localStorage')) {
+                return [];
+            }
+
+            const reviewsJSON = localStorage.getItem(REVIEWS_STORAGE_KEY);
+            return reviewsJSON ? JSON.parse(reviewsJSON) : [];
+        }
+
+        // Sort reviews based on selected criteria
+        function sortReviews(reviews, sortBy) {
+            switch (sortBy) {
+                case 'date-desc':
+                    return reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+                case 'date-asc':
+                    return reviews.sort((a, b) => new Date(a.date) - new Date(b.date));
+                case 'rating-desc':
+                    return reviews.sort((a, b) => b.rating - a.rating);
+                case 'rating-asc':
+                    return reviews.sort((a, b) => a.rating - b.rating);
+                default:
+                    return reviews;
+            }
+        }
+
+        // Display reviews in the grid
+        function displayReviews(limit = INITIAL_DISPLAY_COUNT) {
+            const grid = document.getElementById('reviews-grid');
+            const viewMoreButton = document.getElementById('view-more');
+            const reviewCount = document.getElementById('review-count');
+            grid.innerHTML = ''; // Clear existing reviews
+            
+            let reviews = getReviews();
+            reviews = sortReviews(reviews, document.getElementById('sort-reviews').value);
+
+            if (reviews.length === 0) {
+                grid.innerHTML = '<p class="no-reviews">No reviews yet. Be the first to share your experience!</p>';
+                reviewCount.textContent = '0 reviews';
+                viewMoreButton.style.display = 'none';
+                return;
+            }
+
+            const totalReviews = reviews.length;
+            const reviewsToShow = reviews.slice(0, limit);
+
+            reviewsToShow.forEach(review => {
+                const reviewCard = createReviewCard(
+                    review.name,
+                    review.rating,
+                    review.title,
+                    review.review,
+                    review.date
+                );
+                grid.appendChild(reviewCard);
+            });
+
+            reviewCount.textContent = `Showing ${reviewsToShow.length} of ${totalReviews} reviews`;
+            viewMoreButton.style.display = totalReviews > limit ? 'block' : 'none';
+        }
+
+        // Create a review card element
+        function createReviewCard(name, rating, title, reviewText, dateString) {
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += i <= rating ? '★' : '☆';
+            }
+
+            const reviewCard = document.createElement('div');
+            reviewCard.className = 'review-card';
+            reviewCard.setAttribute('role', 'listitem');
+            reviewCard.setAttribute('tabindex', '0');
+            reviewCard.innerHTML = `
+                <h3>${title}</h3>
+                <div class="rating">${starsHtml}</div>
+                <div class="review-meta">${name} - ${dateString}</div>
+                <p>${reviewText}</p>
+            `;
+
+            return reviewCard;
+        }
+
+        // Form submission
+        const reviewForm = document.getElementById('review-form');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const rating = parseInt(ratingInput.value);
+            const title = document.getElementById('title').value.trim();
+            const review = document.getElementById('review').value.trim();
+
+            if (!name || !title || !review || rating === 0) {
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+                return;
+            }
+
+            const today = new Date();
+            const dateString = today.toLocaleDateString('en-US', { 
+                month: 'long', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+
+            const reviewData = {
+                name,
+                rating,
+                title,
+                review,
+                date: dateString
+            };
+
+            saveReview(reviewData);
+            displayedCount = INITIAL_DISPLAY_COUNT; // Reset to initial count after new review
+            displayReviews(displayedCount);
+
+            successMessage.style.display = 'block';
+            reviewForm.reset();
+            ratingInput.value = '0';
+            selectedRating = 0;
+            stars.forEach(s => {
+                s.classList.remove('filled');
+                s.setAttribute('aria-checked', 'false');
+            });
+
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        });
+
+        // View More functionality
+        const viewMoreButton = document.getElementById('view-more');
+        viewMoreButton.addEventListener('click', () => {
+            displayedCount += LOAD_MORE_COUNT;
+            displayReviews(displayedCount);
+            const grid = document.getElementById('reviews-grid');
+            grid.lastElementChild.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Sort reviews on change
+        const sortSelect = document.getElementById('sort-reviews');
+        sortSelect.addEventListener('change', () => {
+            displayReviews(displayedCount);
+        });
+
+        // Initialize and display reviews when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeDefaultReviews();
+            displayReviews(displayedCount);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+/* Modern Typography with Performance Optimization */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Custom Properties - Extended Color System */
+:root {
+  --primary-color: #4a6bdf;
+  --primary-light: #6c89f5;
+  --primary-dark: #3a54b4;
+  --secondary-color: #9c3fe6;
+  --secondary-light: #b662ff;
+  --secondary-dark: #7e32b8;
+  --dark-color: #1c1d25;
+  --light-color: #f9f9ff;
+  --text-primary: #2c2c35;
+  --text-secondary: #4a4a57;
+  --card-shadow: 0 10px 30px rgba(74, 107, 223, 0.08);
+  --transition-default: 0.3s ease;
+  --transition-smooth: 0.5s cubic-bezier(0.5, 0, 0.1, 1);
+  --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+/* Reset & Base Styles with Smooth Scrolling */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 62.5%; /* 10px base for easier rem calculation */
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--light-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 1.6rem;
+  overflow-x: hidden;
+}
+
+/* Enhanced Focus States for Accessibility */
+:focus {
+  outline: 0.3rem solid var(--primary-light);
+  outline-offset: 0.3rem;
+  border-radius: 0.4rem;
+}
+
+/* Refined Glass-morphism Navigation */
+nav {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background var(--transition-default), box-shadow var(--transition-default);
+  height: 6rem;
+  will-change: background, box-shadow;
+}
+
+nav.scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 0.4rem 1.6rem rgba(0, 0, 0, 0.08);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--light-color);
+  font-weight: 500;
+  padding: 1.6rem 2rem;
+  display: block;
+  position: relative;
+  transition: color var(--transition-default), transform var(--transition-default);
+}
+
+nav.scrolled ul li a {
+  color: var(--dark-color);
+}
+
+nav ul li a:hover, nav ul li a:focus {
+  color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0.8rem;
+  left: 50%;
+  width: 0;
+  height: 0.3rem;
+  background: var(--gradient);
+  transition: width var(--transition-default), left var(--transition-default);
+  border-radius: 0.2rem;
+}
+
+nav ul li a:hover::after, nav ul li a:focus::after {
+  width: 80%;
+  left: 10%;
+}
+
+/* Mobile Navigation Toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--light-color);
+  font-size: 2.4rem;
+  cursor: pointer;
+  padding: 1rem;
+  transition: transform var(--transition-default);
+}
+
+nav.scrolled .nav-toggle {
+  color: var(--dark-color);
+}
+
+.nav-toggle:hover, .nav-toggle:focus {
+  transform: rotate(90deg);
+}
+
+/* Modern Header with Enhanced Gradient Effect */
+header {
+  background: var(--gradient);
+  color: white;
+  padding: 6rem 2rem;
+  text-align: center;
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  margin-top: 6rem;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(rgba(255, 255, 255, 0.15), transparent);
+  transform: rotate(30deg);
+  pointer-events: none;
+  animation: pulse 15s infinite alternate;
+  will-change: opacity;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  100% { opacity: 0.9; }
+}
+
+/* Enhanced Section Animation */
+section {
+  padding: 8rem 2rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(3rem);
+  transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+}
+
+section.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Improved Modern Card Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 3rem;
+  max-width: 140rem;
+  width: 90%;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* Refined Cards with Layered Effect */
+.card {
+  background: white;
+  padding: 3rem 2.5rem;
+  border-radius: 1.6rem;
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition-default), box-shadow var(--transition-default), rotate var(--transition-default);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0.5rem;
+  background: var(--gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-smooth);
+  z-index: 1;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(74, 107, 223, 0.02);
+  transform: scale(0.95);
+  border-radius: 1.2rem;
+  z-index: 0;
+  transition: transform var(--transition-default);
+}
+
+.card:hover, .card:focus-within {
+  transform: translateY(-1rem) rotate(1deg);
+  box-shadow: 0 2rem 4rem rgba(74, 107, 223, 0.15);
+}
+
+.card:hover::before, .card:focus-within::before {
+  transform: scaleX(1);
+}
+
+.card:hover::after, .card:focus-within::after {
+  transform: scale(1);
+}
+
+/* Craft Items with Improved Animation */
+.craft-item {
+  transition: transform var(--transition-default), box-shadow var(--transition-default);
+  border-radius: 1.2rem;
+  overflow: hidden;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.05);
+}
+
+.craft-item:hover, .craft-item:focus {
+  transform: scale(1.05) translateY(-0.5rem);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.1);
+}
+
+/* Modern Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 2.8rem;
+  background: var(--gradient);
+  color: white;
+  border: none;
+  border-radius: 5rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--transition-default);
+  box-shadow: 0 0.5rem 1.5rem rgba(74, 107, 223, 0.2);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.btn:hover, .btn:focus {
+  box-shadow: 0 0.8rem 2.5rem rgba(74, 107, 223, 0.4);
+  transform: translateY(-0.3rem) scale(1.02);
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.8s ease;
+}
+
+.btn:hover::after, .btn:focus::after {
+  left: 100%;
+}
+
+/* Enhanced Modern Footer */
+footer {
+  background: var(--dark-color);
+  color: white;
+  padding: 5rem 2rem 3rem;
+  position: relative;
+}
+
+footer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0.3rem;
+  background: var(--gradient);
+}
+
+.footer-content {
+  max-width: 140rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 3rem;
+  padding-bottom: 2rem;
+}
+
+.footer-column {
+  text-align: left;
+}
+
+.footer-column h3 {
+  color: var(--primary-light);
+  margin-bottom: 2rem;
+  position: relative;
+  font-size: 2rem;
+}
+
+.footer-column h3::after {
+  content: '';
+  position: absolute;
+  bottom: -0.8rem;
+  left: 0;
+  width: 4rem;
+  height: 0.3rem;
+  background: var(--gradient);
+}
+
+.footer-column ul {
+  list-style: none;
+}
+
+.footer-column ul li {
+  margin-bottom: 1.2rem;
+}
+
+.footer-column a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color var(--transition-default);
+}
+
+.footer-column a:hover, .footer-column a:focus {
+  color: white;
+}
+
+.copyright {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 0.1rem solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+/* Improved Responsive Design */
+@media (max-width: 992px) {
+  html { font-size: 60%; }
+  section { padding: 6rem 2rem; }
+}
+
+@media (max-width: 768px) {
+  html { font-size: 58%; }
+  
+  .nav-toggle {
+    display: block;
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    display: none;
+    position: absolute;
+    top: 6rem;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(1rem);
+    padding: 1rem 0;
+    transition: opacity var(--transition-default), transform var(--transition-default);
+    transform: translateY(-1rem);
+    opacity: 0;
+  }
+  
+  nav ul.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  nav ul li a {
+    padding: 1.5rem;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+    width: 95%;
+  }
+  
+  section { padding: 5rem 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  html { font-size: 55%; }
+  .card { padding: 2rem 1.5rem; }
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* Enhanced Modern Scrollbar */
+::-webkit-scrollbar {
+  width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient);
+  border-radius: 0.5rem;
+  border: 0.2rem solid #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--primary-dark), var(--secondary-dark));
+}
+
+/* Accessibility Improvements */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Print Styles */
+@media print {
+  body { background: white; color: black; }
+  nav, footer { display: none; }
+  .card { box-shadow: none; border: 0.1rem solid #ddd; }
+  section { padding: 1rem 0; }
+}

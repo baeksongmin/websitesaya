@@ -1,0 +1,3442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore CraftGallery's collection of handmade artisan crafts from talented Malaysian artisans">
+    <meta name="keywords" content="craft gallery, artisan crafts, handmade items, Malaysian crafts, traditional crafts">
+    <meta name="author" content="CraftGallery">
+    <title>CraftGallery - Artisan Craft Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6bdf;
+            --secondary-color: #9c3fe6;
+            --accent-color: #de2828;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --dark-color: #1c1d25;
+            --light-color: #f9f9ff;
+            --card-shadow: 0 10px 30px rgba(74, 107, 223, 0.08);
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-color);
+            color: #444;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+    
+        /* Enhanced Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        nav.scrolled .logo {
+            color: var(--primary-color);
+        }
+
+        .logo:hover {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav.scrolled a {
+            color: var(--dark-color);
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        nav.scrolled a:hover, nav.scrolled a.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        nav.scrolled .menu-toggle {
+            color: var(--primary-color);
+        }
+
+        header {
+    background: var(--gradient);
+    min-height: 90vh; /* Increased from 40vh to 90vh */
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+/* Add this back-pattern styling */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.2;
+    z-index: 1;
+    animation: backgroundShift 20s linear infinite;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin-top: 4rem;
+}
+
+@keyframes backgroundShift {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+}
+
+@media (max-width: 768px) {
+    .nav-container { padding: 0.5rem 1rem; }
+    .menu-toggle { display: block; }
+    nav ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.5rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        transform: translateY(-150%);
+        transition: transform 0.3s ease;
+        z-index: 1010;
+    }
+    nav ul.active { transform: translateY(0); }
+    nav a { color: var(--dark-color); }
+}
+
+@media (min-width: 769px) {
+    .menu-toggle { display: none; }
+}
+        header {
+    background: var(--gradient);
+    min-height: 40vh;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem 2rem; /* Changed from 2rem to include top padding */
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+        /* Header decoration */
+        .header-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            opacity: 0.1;
+        }
+
+        .header-decoration-item {
+            position: absolute;
+            font-size: 8rem;
+            color: white;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .header-decoration-item:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .header-decoration-item:nth-child(2) {
+            top: 60%;
+            left: 20%;
+            animation-delay: 1s;
+        }
+
+        .header-decoration-item:nth-child(3) {
+            top: 20%;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .header-decoration-item:nth-child(4) {
+            top: 50%;
+            left: 80%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+            margin-bottom: 2rem;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .header-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-btn-primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .header-btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+
+        .header-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Enhanced filter section */
+        .filter-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--card-shadow);
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .filter-heading {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-heading i {
+            color: var(--primary-color);
+        }
+
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-btn i {
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            border-radius: 30px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .filter-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .view-toggle {
+            display: flex;
+            background: #f5f5f5;
+            border-radius: 30px;
+            padding: 0.3rem;
+            margin-left: auto;
+        }
+
+        .view-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #777;
+        }
+
+        .view-btn.active {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Featured items showcase */
+        .featured-showcase {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .featured-showcase.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .showcase-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .showcase-title {
+            font-size: 2.2rem;
+            display: inline-block;
+            position: relative;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .showcase-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 4px;
+        }
+
+        .showcase-subtitle {
+            color: #666;
+            max-width: 800px;
+            margin: 1.5rem auto 0;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            height: 600px;
+        }
+
+        .showcase-main {
+            grid-column: 1;
+            grid-row: 1 / span 2;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .showcase-secondary {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .showcase-item {
+            position: relative;
+            height: 100%;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .showcase-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .showcase-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem;
+            transform: translateY(20%);
+            transition: transform 0.5s ease;
+        }
+
+        .showcase-item:hover .showcase-info {
+            transform: translateY(0);
+        }
+
+        .showcase-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .showcase-tag {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .showcase-info p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            max-width: 90%;
+        }
+
+        .showcase-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: var(--dark-color);
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .showcase-btn:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Enhanced gallery sections */
+        .gallery-section {
+            margin-bottom: 5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .gallery-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            color: var(--dark-color);
+            display: inline-block;
+            position: relative;
+            font-size: 2.2rem;
+        }
+
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--gradient);
+            bottom: -10px;
+            left: 25%;
+            border-radius: 3px;
+        }
+
+        .section-description {
+            max-width: 800px;
+            margin: 0 auto;
+            color: #666;
+            font-size: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        /* Grid view (default) */
+        .gallery-grid-view .section-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* List view */
+        .gallery-list-view .section-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .gallery-list-view .gallery-item {
+            display: flex;
+            height: auto;
+            min-height: 200px;
+        }
+
+        .gallery-list-view .gallery-item img {
+            width: 250px;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-list-view .gallery-info {
+            position: static;
+            transform: none;
+            background: white;
+            color: var(--dark-color);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-list-view .gallery-info h3 {
+            color: var(--dark-color);
+        }
+
+        .gallery-list-view .craft-description {
+            color: #555;
+        }
+
+        .gallery-list-view .gallery-item:hover .gallery-info {
+            transform: none;
+            background: #f9f9f9;
+        }
+
+        .gallery-item {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--card-shadow);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 300px;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(74, 107, 223, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 1.5rem;
+            transform: translateY(40%);
+            transition: transform 0.5s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-item:hover .gallery-info {
+            transform: translateY(0);
+        }
+
+        .gallery-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .gallery-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+
+        .gallery-info h3 {
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        .gallery-info .craft-description {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .gallery-meta {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .gallery-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-right: 1rem;
+        }
+
+        .gallery-link {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: white;
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease 0.2s;
+        }
+
+        .gallery-item:hover .gallery-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 4rem;
+        }
+
+        .pagination-container {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .page-btn.text {
+            width: auto;
+            padding: 0 1rem;
+            border-radius: 20px;
+        }
+
+        .page-btn:hover, .page-btn.active {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        .page-divider {
+            color: #777;
+            font-weight: 500;
+        }
+
+        /* Enhanced modal styling */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .gallery-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            animation: fadeInUp 0.5s ease-out;
+            background: rgba(12, 12, 20, 0.7);
+            border-radius: 20px;
+            padding: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-action {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-action:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .modal-main {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .modal-image-container {
+            flex: 1.5;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            max-height: 70vh;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .modal-thumbnails {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .modal-thumbnail {
+            width: 80px;
+            height: 60px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .modal-thumbnail.active {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .modal-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-info {
+            flex: 1;
+            color: white;
+            padding: 0 0 0 1rem;
+        }
+
+        .modal-info h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: white;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .modal-info h3:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient);
+            bottom: 0;
+            left: 0;
+            border-radius: 3px;
+        }
+
+        .modal-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-tag {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .modal-details {
+            margin-bottom: 2rem;
+        }
+
+        .modal-info p {
+            margin: 0 0 1.5rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .modal-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 0;
+        }
+
+        .modal-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .modal-meta-label {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .modal-meta-value {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .modal-actions-bottom {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .modal-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 2100;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: none;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .modal-nav button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .modal-nav button:hover {
+            background: var(--gradient);
+            transform: scale(1.1);
+        }
+
+        /* Testimonials section */
+        .testimonials-section {
+            margin: 6rem auto 4rem;
+            max-width: 1200px;
+            padding: 4rem;
+            background: var(--gradient);
+            border-radius: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .testimonials-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonials-decoration {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .testimonials-decoration:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -100px;
+        }
+
+        .testimonials-decoration:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            right: -50px;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 5;
+        }
+
+        .testimonials-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonials-subtitle {
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .testimonials-slider {
+            position: relative;
+            z-index: 5;
+        }
+
+        .testimonials-container {
+            display: flex;
+            gap: 2rem;
+            overflow-x: hidden;
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -15px;
+            font-size: 4rem;
+            font-family: Georgia, serif;
+            opacity: 0.3;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .testimonial-info p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .testimonial-rating {
+            margin-top: 0.5rem;
+            color: var(--warning-color);
+            font-size: 0.9rem;
+        }
+
+        .testimonials-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .testimonials-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonials-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+        
+        /* Enhanced Memory Game Styles */
+        .game-section {
+            margin: 6rem auto 4rem;
+            max-width: 1200px;
+            padding: 0 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        
+        .game-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .game-decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--gradient);
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .game-decoration:nth-child(1) {
+            top: -100px;
+            left: -100px;
+        }
+
+        .game-decoration:nth-child(2) {
+            bottom: -100px;
+            right: -100px;
+        }
+
+        .game-header {
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .game-title {
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            position: relative;
+            color: var(--dark-color);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .game-title:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--gradient);
+            bottom: -10px;
+            left: 25%;
+            border-radius: 3px;
+        }
+
+        .game-description {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            color: #666;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+
+        .game-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f5f5f5;
+            padding: 0.7rem 1.2rem;
+            border-radius: 30px;
+        }
+
+        .game-stat i {
+            color: var(--primary-color);
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .memory-card {
+            height: 130px;
+            perspective: 1000px;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched .card-front {
+            background: rgba(46, 204, 113, 0.2);
+            border-color: #2ecc71;
+        }
+
+        .card-front, .card-back {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            position: absolute;
+            border-radius: 15px;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card-front {
+            background: white;
+            border: 2px solid var(--primary-color);
+            transform: rotateY(180deg);
+        }
+
+        .card-back {
+            background: var(--gradient);
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .craft-icon {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
+        }
+
+        .game-controls {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .game-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .game-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(74, 107, 223, 0.3);
+        }
+
+        .game-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .game-message {
+            margin-top: 1.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+            min-height: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 10;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Game completion overlay */
+        .game-completion {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .game-completion.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .completion-icon {
+            font-size: 5rem;
+            color: var(--success-color);
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .completion-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .completion-stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .completion-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .completion-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .completion-label {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .completion-message {
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .completion-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        .completion-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(74, 107, 223, 0.3);
+        }
+
+        /* Enhanced footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-logo i {
+            font-size: 2.2rem;
+            -webkit-text-fill-color: initial;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-about p {
+            color: #ddd;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--gradient);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a i {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-newsletter {
+            margin-bottom: 2rem;
+        }
+
+        .footer-newsletter h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-newsletter h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            border-radius: 30px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            outline: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .newsletter-button {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .newsletter-button:hover {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+
+        .copyright {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            text-align: center;
+            color: #ddd;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 900;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .showcase-grid {
+                height: auto;
+                grid-template-columns: 1fr;
+            }
+
+            .showcase-main {
+                grid-row: 1;
+                grid-column: 1;
+            }
+
+            .showcase-item {
+                height: 400px;
+            }
+
+            .modal-main {
+                flex-direction: column;
+            }
+
+            .modal-image-container {
+                max-height: 50vh;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .section-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .testimonial-slide {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .game-board {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header { min-height: 30vh; }
+            .header-content h1 { font-size: 2.5rem; }
+            .nav-container { padding: 0.5rem 1rem; }
+            .header-buttons { flex-direction: column; gap: 1rem; }
+            
+            .menu-toggle {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: white;
+                cursor: pointer;
+            }
+            
+            nav.scrolled .menu-toggle { color: var(--primary-color); }
+            
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.5rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 1010;
+            }
+            
+            nav ul.active { transform: translateY(0); }
+            nav a { color: var(--dark-color); }
+            
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-board {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .memory-card {
+                height: 100px;
+            }
+            
+            .game-stats {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
+            }
+
+            .testimonials-section {
+                padding: 2rem;
+            }
+
+            .search-container {
+                margin-bottom: 1rem;
+            }
+
+            .gallery-filters {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .showcase-info h3 {
+                font-size: 1.5rem;
+            }
+
+            .view-toggle {
+                margin: 1rem auto 0;
+            }
+
+            .modal-info h3 {
+                font-size: 1.8rem;
+            }
+
+            .modal-actions-bottom {
+                flex-direction: column;
+            }
+
+            .modal-btn {
+                text-align: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                border-radius: 15px;
+            }
+
+            .newsletter-input {
+                border-radius: 15px 15px 0 0;
+                text-align: center;
+            }
+
+            .newsletter-button {
+                border-radius: 0 0 15px 15px;
+                padding: 1rem;
+            }
+
+            .completion-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-toggle { display: none; }
+        }
+
+        /* Skip to main content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            z-index: 1001;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Focus styles for better accessibility */
+        a:focus, button:focus, input:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Back to top button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <nav role="navigation">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-palette"></i> CraftGallery
+            </a>
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="artisans.html"><i class="fas fa-user-friends"></i> Artisans</a></li>
+                <li><a href="#" class="active" aria-current="page"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="tutorials.html"><i class="fas fa-book-open"></i> Tutorials</a></li>
+                <li><a href="reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+                <li><a href="map.html"><i class="fas fa-map-marked-alt"></i> Map</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <header role="banner">
+        <div class="header-decoration">
+            <div class="header-decoration-item"><i class="fas fa-palette"></i></div>
+            <div class="header-decoration-item"><i class="fas fa-paint-brush"></i></div>
+            <div class="header-decoration-item"><i class="fas fa-vase"></i></div>
+            <div class="header-decoration-item"><i class="fas fa-scroll"></i></div>
+        </div>
+        <div class="header-content">
+            <h1>Malaysian Craft Gallery</h1>
+            <p>Discover the rich cultural heritage of Malaysia through our curated collection of traditional and contemporary artisan crafts.</p>
+            <div class="header-buttons">
+                <a href="#featured-showcase" class="header-btn header-btn-primary">
+                    <i class="fas fa-crown"></i> Featured Crafts
+                </a>
+                <a href="#memory-game-section" class="header-btn header-btn-secondary">
+                    <i class="fas fa-gamepad"></i> Play Memory Game
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="gallery-container">
+        <section class="filter-container" aria-labelledby="filter-heading">
+            <h2 id="filter-heading" class="filter-heading">
+                <i class="fas fa-filter"></i> Explore Our Collection
+            </h2>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="search-input" placeholder="Search for crafts, materials, or techniques..." aria-label="Search gallery">
+                <span class="search-icon" aria-hidden="true">
+                    <i class="fas fa-search"></i>
+                </span>
+            </div>
+            
+            <div class="gallery-filters" role="radiogroup" aria-label="Filter gallery by category">
+                <button class="filter-btn active" data-filter="all" role="radio" aria-checked="true">
+                    <i class="fas fa-border-all"></i> All Crafts
+                </button>
+                <button class="filter-btn" data-filter="pottery" role="radio" aria-checked="false">
+                    <i class="fas fa-vase"></i> Pottery
+                </button>
+                <button class="filter-btn" data-filter="weaving" role="radio" aria-checked="false">
+                    <i class="fas fa-vector-square"></i> Weaving
+                </button>
+                <button class="filter-btn" data-filter="batik" role="radio" aria-checked="false">
+                    <i class="fas fa-tshirt"></i> Batik
+                </button>
+                <button class="filter-btn" data-filter="woodcraft" role="radio" aria-checked="false">
+                    <i class="fas fa-tree"></i> Woodcraft
+                </button>
+                <button class="filter-btn" data-filter="jewelry" role="radio" aria-checked="false">
+                    <i class="fas fa-gem"></i> Jewelry
+                </button>
+                <button class="filter-btn" data-filter="kite" role="radio" aria-checked="false">
+                    <i class="fas fa-wind"></i> Kite Art
+                </button>
+            </div>
+            
+            <div class="filter-actions">
+                <div class="view-toggle">
+                    <button id="grid-view-btn" class="view-btn active" aria-label="Grid view">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button id="list-view-btn" class="view-btn" aria-label="List view">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Showcase Section -->
+        <section id="featured-showcase" class="featured-showcase">
+            <div class="showcase-header">
+                <h2 class="showcase-title">Featured Masterpieces</h2>
+                <p class="showcase-subtitle">Highlighting exceptional examples of Malaysian craftsmanship that showcase the pinnacle of traditional techniques and artistic expression.</p>
+            </div>
+            
+            <div class="showcase-grid">
+                <div class="showcase-main">
+                    <div class="showcase-item" tabindex="0" data-category="batik">
+                        <img src="picture/7.jpg" alt="Contemporary batik wall art with abstract design" loading="lazy">
+                        <div class="showcase-info">
+                            <span class="showcase-tag">Masterpiece</span>
+                            <h3>Contemporary Batik Art</h3>
+                            <p>A stunning fusion of traditional batik techniques with modern abstract expression. This award-winning piece combines centuries-old wax-resist methods with bold contemporary color palettes and innovative motifs.</p>
+                            <a href="#" class="showcase-btn">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="showcase-secondary">
+                    <div class="showcase-item" tabindex="0" data-category="woodcraft">
+                        <img src="picture/10.jpg" alt="Intricate wooden sculpture of a traditional dancer" loading="lazy">
+                        <div class="showcase-info">
+                            <span class="showcase-tag">Featured</span>
+                            <h3>Traditional Dancer Sculpture</h3>
+                            <p>Exquisite hardwood carving depicting the fluid movement of a Malaysian traditional dance.</p>
+                            <a href="#" class="showcase-btn">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="showcase-secondary">
+                    <div class="showcase-item" tabindex="0" data-category="kite">
+                        <img src="picture/15.jpg" alt="Traditional Malaysian wau bulan kite with intricate patterns" loading="lazy">
+                        <div class="showcase-info">
+                            <span class="showcase-tag">Featured</span>
+                            <h3>Wau Bulan Masterpiece</h3>
+                            <p>A magnificent moon-shaped kite handcrafted by a master artisan, featuring intricate traditional patterns.</p>
+                            <a href="#" class="showcase-btn">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pottery Section -->
+        <section class="gallery-section" data-category="pottery">
+            <div class="section-header">
+                <h2>Pottery Masterpieces</h2>
+                <p class="section-description">Discover the rich tradition of Malaysian pottery, where clay is transformed into objects of both utility and beauty through time-honored techniques and innovative designs.</p>
+            </div>
+            <div class="section-grid" role="list">
+                <div class="gallery-item" data-category="pottery" role="listitem" tabindex="0">
+                    <img src="picture/1.jpg" alt="Traditional Ceramic Vase with blue patterns" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Pottery</span>
+                            <span class="gallery-tag">Traditional</span>
+                        </div>
+                        <h3>Ceramic Vase</h3>
+                        <p class="craft-description">This exquisite ceramic piece features hand-painted intricate patterns using centuries-old techniques. Each brushstroke is meticulously applied with natural pigments, creating a harmony of traditional motifs that tell stories of cultural heritage.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Rozana Musa
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Melaka
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="pottery" role="listitem" tabindex="0">
+                    <img src="picture/2.jpg" alt="Set of minimalist clay pots in earth tones" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Pottery</span>
+                            <span class="gallery-tag">Contemporary</span>
+                        </div>
+                        <h3>Minimalist Clay Pot Set</h3>
+                        <p class="craft-description">These sleek, modern vessels honor traditional clay-working techniques while embracing contemporary minimalist design. Crafted from locally-sourced clay and fired in a traditional kiln, the earth-tone glazes showcase the natural beauty of the materials.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Ahmad Zahir
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kuala Lumpur
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="pottery" role="listitem" tabindex="0">
+                    <img src="picture/3.jpg" alt="Decorative ceramic bowl with glazed finish" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Pottery</span>
+                            <span class="gallery-tag">Decorative</span>
+                        </div>
+                        <h3>Decorative Bowl</h3>
+                        <p class="craft-description">This stunning decorative bowl showcases a unique crystalline glazing technique that creates one-of-a-kind patterns resembling frost crystals. The form is wheel-thrown and carefully shaped to create perfect balance, while the specialized firing process brings out vibrant color interactions.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Mei Lin
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Penang
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Weaving Section -->
+        <section class="gallery-section" data-category="weaving">
+            <div class="section-header">
+                <h2>Weaving Wonders</h2>
+                <p class="section-description">Explore the intricate art of Malaysian weaving, where skilled hands transform threads and fibers into textiles of extraordinary beauty and cultural significance.</p>
+            </div>
+            <div class="section-grid" role="list">
+                <div class="gallery-item" data-category="weaving" role="listitem" tabindex="0">
+                    <img src="picture/craft2.jpg" alt="Colorful woven wall hanging with geometric patterns" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Weaving</span>
+                            <span class="gallery-tag">Wall Art</span>
+                        </div>
+                        <h3>Geometric Wall Hanging</h3>
+                        <p class="craft-description">This vibrant wall hanging combines traditional backstrap loom techniques with bold geometric designs. Every thread is hand-dyed using plant-based pigments, creating a stunning interplay of colors. The intricate knotting methods used date back hundreds of years.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Tengku Marina Ibrahim
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Sarawak
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="weaving" role="listitem" tabindex="0">
+                    <img src="picture/4.jpg" alt="Hand-woven basket made from natural fibers" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Weaving</span>
+                            <span class="gallery-tag">Basket</span>
+                        </div>
+                        <h3>Natural Fiber Basket</h3>
+                        <p class="craft-description">This functional basket is crafted using sustainable, locally harvested reeds and grasses. The tight weaving pattern creates exceptional durability while maintaining visual lightness. The natural variations in the fibers create subtle textures that highlight the craft's connection to nature.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Asmah Ismail
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Sarawak
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="weaving" role="listitem" tabindex="0">
+                    <img src="picture/5.jpg" alt="Intricate ikat textile with traditional patterns" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Weaving</span>
+                            <span class="gallery-tag">Textile</span>
+                        </div>
+                        <h3>Ikat Textile</h3>
+                        <p class="craft-description">This intricate ikat textile showcases the rare double-ikat technique where both warp and weft threads are resist-dyed before weaving. This labor-intensive process creates remarkably precise patterns that seem to shimmer with movement. The motifs represent ancestral symbols and natural elements.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Maria Tanoti
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Sarawak
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Batik Section -->
+        <section class="gallery-section" data-category="batik">
+            <div class="section-header">
+                <h2>Batik Beauties</h2>
+                <p class="section-description">Immerse yourself in the colorful world of Malaysian batik, where the ancient wax-resist dyeing technique creates textiles of mesmerizing patterns and vibrant colors.</p>
+            </div>
+            <div class="section-grid" role="list">
+                <div class="gallery-item" data-category="batik" role="listitem" tabindex="0">
+                    <img src="picture/6.jpg" alt="Hand-drawn batik fabric with floral motifs" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Batik</span>
+                            <span class="gallery-tag">Traditional</span>
+                        </div>
+                        <h3>Floral Batik</h3>
+                        <p class="craft-description">This exquisite batik employs the traditional canting technique, where molten wax is applied using a small copper tool to create floral patterns of extraordinary detail. The fabric undergoes multiple dyeing stages, with each color requiring new wax applications, creating rich depth and texture.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Siti Zainon Ismail
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Terengganu
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="batik" role="listitem" tabindex="0">
+                    <img src="picture/7.jpg" alt="Contemporary batik wall art with abstract design" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Batik</span>
+                            <span class="gallery-tag">Contemporary</span>
+                        </div>
+                        <h3>Contemporary Batik Art</h3>
+                        <p class="craft-description">This contemporary batik piece pushes the boundaries of traditional techniques to create bold, abstract expressions. The innovative use of resist materials and experimental dyeing methods creates unexpected color interactions while honoring the centuries-old wax-resist tradition.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Toh Puan Aishah Ong
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kuala Lumpur
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="batik" role="listitem" tabindex="0">
+                    <img src="picture/8.jpg" alt="Batik table runner with geometric patterns" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Batik</span>
+                            <span class="gallery-tag">Home Decor</span>
+                        </div>
+                        <h3>Geometric Table Runner</h3>
+                        <p class="craft-description">This elegant table runner features geometric motifs created using both traditional and cap (stamp) batik techniques. The premium cotton fabric provides a perfect canvas for the intricate patterns, while natural indigo and soga brown dyes create a timeless color palette inspired by ancient batik traditions.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Fatimah Arshad
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kelantan
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Woodcraft Section -->
+        <section class="gallery-section" data-category="woodcraft">
+            <div class="section-header">
+                <h2>Wooden Wonders</h2>
+                <p class="section-description">Witness the remarkable transformation of wood under the skilled hands of Malaysian woodcarvers, who continue a revered tradition of creating functional art and expressive sculptures.</p>
+            </div>
+            <div class="section-grid" role="list">
+                <div class="gallery-item" data-category="woodcraft" role="listitem" tabindex="0">
+                    <img src="picture/9.jpg" alt="Hand-carved wooden bowl with smooth finish" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Woodcraft</span>
+                            <span class="gallery-tag">Functional</span>
+                        </div>
+                        <h3>Hand-carved Bowl</h3>
+                        <p class="craft-description">This elegant bowl is carved from a single piece of teak, showcasing the wood's natural grain patterns and warm coloration. Using traditional carving tools and techniques, the piece is hollowed and shaped to maintain perfect balance. The smooth finish is achieved through hours of meticulous sanding.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Ruwaida Baharudin
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Malaysia
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="woodcraft" role="listitem" tabindex="0">
+                    <img src="picture/10.jpg" alt="Intricate wooden sculpture of a traditional dancer" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Woodcraft</span>
+                            <span class="gallery-tag">Sculpture</span>
+                        </div>
+                        <h3>Dancer Sculpture</h3>
+                        <p class="craft-description">This dynamic sculpture captures the flowing movement of traditional dance through intricate carving techniques. Every detail from the facial expression to the costume folds is meticulously rendered in hardwood. Traditional hand tools create textures that highlight the dramatic poses and bring the figure to life.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Nik Rashiddin Nik Hussein
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kelantan
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="woodcraft" role="listitem" tabindex="0">
+                    <img src="picture/11.jpg" alt="Wooden kitchen utensils with decorative handles" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Woodcraft</span>
+                            <span class="gallery-tag">Kitchenware</span>
+                        </div>
+                        <h3>Artisan Utensil Set</h3>
+                        <p class="craft-description">This functional kitchen set blends practicality with artistic expression. Each utensil is hand-carved from sustainably harvested wood, with special attention to ergonomics and balance. The handles feature decorative relief carvings inspired by botanical forms, making everyday tools into objects of beauty.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Lee Chee Cheng
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Penang
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Jewelry Section -->
+        <section class="gallery-section" data-category="jewelry">
+            <div class="section-header">
+                <h2>Jewelry Gems</h2>
+                <p class="section-description">Discover the exquisite craftsmanship of Malaysian jewelry, where precious metals and gems are transformed into wearable art that reflects cultural traditions and personal expression.</p>
+            </div>
+            <div class="section-grid" role="list">
+                <div class="gallery-item" data-category="jewelry" role="listitem" tabindex="0">
+                    <img src="picture/12.jpg" alt="Silver filigree necklace with traditional patterns" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Jewelry</span>
+                            <span class="gallery-tag">Filigree</span>
+                        </div>
+                        <h3>Silver Filigree Necklace</h3>
+                        <p class="craft-description">This stunning necklace showcases the ancient art of silver filigree, where fine silver wires are twisted, curled, and soldered together to create lace-like designs. The intricate patterns draw from traditional motifs representing prosperity and harmony, requiring months of patient craftsmanship.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Mohd Faizal Ghazali
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kelantan
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="jewelry" role="listitem" tabindex="0">
+                    <img src="picture/13.jpg" alt="Contemporary earrings with natural stone accents" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Jewelry</span>
+                            <span class="gallery-tag">Contemporary</span>
+                        </div>
+                        <h3>Natural Stone Earrings</h3>
+                        <p class="craft-description">These contemporary earrings combine traditional metalsmithing techniques with modern design sensibilities. Each piece features locally sourced stones with unique color variations, set in hand-forged metal frames. The distinctive textures are created through careful hammering and oxidation processes.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Norsiah Abdullah
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kuala Lumpur
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="jewelry" role="listitem" tabindex="0">
+                    <img src="picture/14.jpg" alt="Traditional bangle set with engraved designs" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Jewelry</span>
+                            <span class="gallery-tag">Traditional</span>
+                        </div>
+                        <h3>Engraved Bangle Set</h3>
+                        <p class="craft-description">This set of bangles features hand-engraved designs inspired by traditional cultural patterns. Each bangle is formed from a single piece of metal, carefully shaped and then decorated with detailed motifs using small chisels and punches. The varying widths and patterns are designed to be worn together as a harmonious collection.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Suhaimi Saad
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Terengganu
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kite Master Section -->
+        <section class="gallery-section" data-category="kite">
+            <div class="section-header">
+                <h2>Kite Masters</h2>
+                <p class="section-description">Experience the cultural significance and artistic beauty of Malaysian kite making, where traditional designs meet contemporary creativity in these stunning aerial art forms.</p>
+            </div>
+            <div class="section-grid" role="list">
+                <div class="gallery-item" data-category="kite" role="listitem" tabindex="0">
+                    <img src="picture/15.jpg" alt="Traditional Malaysian wau bulan kite with intricate patterns" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Kite Art</span>
+                            <span class="gallery-tag">Traditional</span>
+                        </div>
+                        <h3>Wau Bulan</h3>
+                        <p class="craft-description">This majestic moon-shaped kite represents one of Malaysia's most treasured cultural art forms. The bamboo frame is carefully bent and bound to create the distinctive curved shape, while hand-painted tissue paper creates the vibrant design. The intricate patterns symbolize elements from nature and traditional folklore.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Pak Shafie
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kelantan
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="kite" role="listitem" tabindex="0">
+                    <img src="picture/16.jpg" alt="Colorful Balinese ceremonial kite" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Kite Art</span>
+                            <span class="gallery-tag">Ceremonial</span>
+                        </div>
+                        <h3>Balinese Bebean</h3>
+                        <p class="craft-description">This impressive fish-shaped ceremonial kite embodies centuries of Balinese spiritual traditions. The lightweight bamboo framework demonstrates extraordinary structural engineering, while the hand-painted sail features symbols of protection and prosperity. These kites play important roles in religious ceremonies and seasonal festivals.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Ahmad Fuad
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kelantan
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="kite" role="listitem" tabindex="0">
+                    <img src="picture/17.jpg" alt="Contemporary artistic kite with abstract design" loading="lazy">
+                    <div class="gallery-info">
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Kite Art</span>
+                            <span class="gallery-tag">Contemporary</span>
+                        </div>
+                        <h3>Modern Art Kite</h3>
+                        <p class="craft-description">This contemporary creation fuses traditional kite-making techniques with modern artistic expression. Innovative materials including carbon fiber spars and synthetic fabrics ensure excellent flight characteristics, while hand-applied designs use both traditional and experimental dye methods. The result is a functional sculpture that performs beautifully in the air.</p>
+                        <div class="gallery-meta">
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-user"></i> Ismail Latiff
+                            </span>
+                            <span class="gallery-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Kuala Lumpur
+                            </span>
+                        </div>
+                        <a href="#" class="gallery-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Memory Game Section -->
+        <section class="game-section" id="memory-game-section">
+            <div class="game-header">
+                <h2 class="game-title">Malaysian Craft Memory Game</h2>
+                <p class="game-description">Test your memory by matching pairs of traditional Malaysian craft patterns and symbols. Flip two cards at a time to find matching pairs and learn about cultural motifs.</p>
+            </div>
+            <div class="game-container">
+                <div class="game-decoration"></div>
+                <div class="game-decoration"></div>
+                
+                <div class="game-stats">
+                    <div class="game-stat">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Moves: <span id="moves-count">0</span></span>
+                    </div>
+                    <div class="game-stat">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Pairs Found: <span id="pairs-count">0</span> of 8</span>
+                    </div>
+                    <div class="game-stat">
+                        <i class="fas fa-stopwatch"></i>
+                        <span>Time: <span id="timer">00:00</span></span>
+                    </div>
+                </div>
+                <div class="game-board" id="game-board">
+                    <!-- Cards will be dynamically added here -->
+                </div>
+                <div class="game-controls">
+                    <button id="restart-btn" class="game-btn">
+                        <i class="fas fa-redo-alt"></i> Restart Game
+                    </button>
+                    <button id="hint-btn" class="game-btn">
+                        <i class="fas fa-lightbulb"></i> Hint (3)
+                    </button>
+                </div>
+                <div class="game-message" id="game-message"></div>
+                
+                <!-- Game completion overlay -->
+                <div class="game-completion" id="game-completion">
+                    <div class="completion-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="completion-title">Congratulations!</h3>
+                    <div class="completion-stats">
+                        <div class="completion-stat">
+                            <div class="completion-value" id="completion-moves">0</div>
+                            <div class="completion-label">Moves</div>
+                        </div>
+                        <div class="completion-stat">
+                            <div class="completion-value" id="completion-time">00:00</div>
+                            <div class="completion-label">Time</div>
+                        </div>
+                    </div>
+                    <p class="completion-message">You've successfully matched all Malaysian craft patterns!</p>
+                    <button class="completion-btn" id="play-again-btn">
+                        Play Again
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Enhanced Gallery Modal -->
+    <div class="gallery-modal" role="dialog" aria-label="Gallery item details">
+        <div class="modal-content">
+            <button class="close-modal" tabindex="0" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-main">
+                <div class="modal-image-container">
+                    <img src="" alt="Gallery item" id="modal-img" class="modal-image">
+                    <div class="modal-thumbnails" id="modal-thumbnails">
+                        <!-- Thumbnails will be added dynamically -->
+                    </div>
+                </div>
+                
+                <div class="modal-info">
+                    <h3 id="modal-title"></h3>
+                    <div class="modal-tags" id="modal-tags">
+                        <!-- Tags will be added dynamically -->
+                    </div>
+                    
+                    <div class="modal-details">
+                        <p id="modal-description"></p>
+                        <p>Each piece is handcrafted with attention to detail and cultural authenticity, representing the rich artistic heritage of Malaysia. Our gallery works directly with artisans to ensure fair compensation and preservation of traditional techniques.</p>
+                    </div>
+                    
+                    <div class="modal-meta">
+                        <div class="modal-meta-item">
+                            <div class="modal-meta-label">Artisan</div>
+                            <div class="modal-meta-value" id="modal-artisan"></div>
+                        </div>
+                        <div class="modal-meta-item">
+                            <div class="modal-meta-label">Origin</div>
+                            <div class="modal-meta-value" id="modal-location"></div>
+                        </div>
+                        <div class="modal-meta-item">
+                            <div class="modal-meta-label">Materials</div>
+                            <div class="modal-meta-value">Natural & traditional</div>
+                        </div>
+                        <div class="modal-meta-item">
+                            <div class="modal-meta-label">Technique</div>
+                            <div class="modal-meta-value">Traditional handcraft</div>
+                        </div>
+                    </div>
+            
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-nav">
+                <button id="prev-btn" aria-label="Previous item">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="next-btn" aria-label="Next item">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <i class="fas fa-palette"></i> CraftGallery
+                </div>
+                <p>Celebrating and preserving Malaysia's rich crafting traditions through our curated collection of artisan masterpieces.</p>
+                
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-angle-right"></i> Home</a></li>
+                    <li><a href="artisans.html"><i class="fas fa-angle-right"></i> Artisans</a></li>
+                    <li><a href="tutorials.html"><i class="fas fa-angle-right"></i> Tutorials</a></li>
+                    <li><a href="reviews.html"><i class="fas fa-angle-right"></i> Reviews</a></li>
+                    <li><a href="contact.html"><i class="fas fa-angle-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            
+           
+            
+           
+        
+        <div class="copyright">
+            © 2025 CraftGallery. All rights reserved. Supporting Malaysian artisans and cultural heritage.
+        </div>
+    </footer>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    // Navigation scroll effect
+    window.addEventListener('scroll', () => {
+        document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 100);
+    });
+
+    // Mobile menu
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    menuToggle.addEventListener('click', () => {
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        navMenu.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', !isExpanded);
+        menuToggle.innerHTML = isExpanded ? '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('nav') && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
+
+            // Back to top button
+            const backToTopBtn = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                // Navigation scroll effect
+                document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 100);
+                
+                // Back to top visibility
+                backToTopBtn.classList.toggle('visible', window.scrollY > 500);
+            });
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // View toggle (grid/list)
+            const gridViewBtn = document.getElementById('grid-view-btn');
+            const listViewBtn = document.getElementById('list-view-btn');
+            const galleryContainer = document.querySelector('main');
+            
+            gridViewBtn.addEventListener('click', () => {
+                galleryContainer.classList.remove('gallery-list-view');
+                galleryContainer.classList.add('gallery-grid-view');
+                gridViewBtn.classList.add('active');
+                listViewBtn.classList.remove('active');
+            });
+            
+            listViewBtn.addEventListener('click', () => {
+                galleryContainer.classList.remove('gallery-grid-view');
+                galleryContainer.classList.add('gallery-list-view');
+                gridViewBtn.classList.remove('active');
+                listViewBtn.classList.add('active');
+            });
+
+            // Gallery filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const gallerySections = document.querySelectorAll('.gallery-section');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const showcaseItems = document.querySelectorAll('.showcase-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active state
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-checked', 'false');
+                    });
+                    button.classList.add('active');
+                    button.setAttribute('aria-checked', 'true');
+
+                    const filter = button.getAttribute('data-filter');
+                    const featuredShowcase = document.querySelector('.featured-showcase');
+                    
+                    // Handle featured showcase visibility
+                    if (filter === 'all') {
+                        featuredShowcase.style.display = 'block';
+                    } else {
+                        featuredShowcase.style.display = 'none';
+                        
+                        // Show only matching showcase items if filter matches
+                        showcaseItems.forEach(item => {
+                            const shouldShowItem = item.getAttribute('data-category') === filter;
+                            if (shouldShowItem) {
+                                featuredShowcase.style.display = 'block';
+                            }
+                        });
+                    }
+                    
+                    // Filter sections
+                    if (filter === 'all') {
+                        gallerySections.forEach(section => {
+                            section.style.display = 'block';
+                        });
+                    } else {
+                        gallerySections.forEach(section => {
+                            section.style.display = section.getAttribute('data-category') === filter ? 'block' : 'none';
+                        });
+                    }
+                    
+                    // Go to the first visible section
+                    const visibleSection = document.querySelector(`.gallery-section[style*="display: block"]`);
+                    if (visibleSection) {
+                        setTimeout(() => {
+                            visibleSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                    }
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('search-input');
+            
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                
+                if (searchTerm === '') {
+                    // Reset to default view
+                    document.querySelector('.filter-btn[data-filter="all"]').click();
+                    return;
+                }
+                
+                // Show all sections for searching
+                gallerySections.forEach(section => {
+                    section.style.display = 'block';
+                });
+                
+                // Search through all items
+                let foundAny = false;
+                
+                galleryItems.forEach(item => {
+                    const title = item.querySelector('h3').textContent.toLowerCase();
+                    const desc = item.querySelector('.craft-description').textContent.toLowerCase();
+                    const tags = Array.from(item.querySelectorAll('.gallery-tag'))
+                        .map(tag => tag.textContent.toLowerCase());
+                    const artisan = item.querySelector('.gallery-meta-item')?.textContent.toLowerCase() || '';
+                    
+                    const matches = title.includes(searchTerm) || 
+                                    desc.includes(searchTerm) || 
+                                    tags.some(tag => tag.includes(searchTerm)) ||
+                                    artisan.includes(searchTerm);
+                    
+                    item.style.display = matches ? 'block' : 'none';
+                    if (matches) foundAny = true;
+                });
+                
+                // Handle showcase items
+                showcaseItems.forEach(item => {
+                    const title = item.querySelector('h3').textContent.toLowerCase();
+                    const desc = item.querySelector('p').textContent.toLowerCase();
+                    
+                    const matches = title.includes(searchTerm) || desc.includes(searchTerm);
+                    
+                    item.parentNode.style.display = matches ? 'block' : 'none';
+                    if (matches) foundAny = true;
+                });
+                
+                // Show/hide featured showcase based on search results
+                document.querySelector('.featured-showcase').style.display = 
+                    document.querySelector('.showcase-item[style*="display: block"]') ? 'block' : 'none';
+                
+                // Update sections visibility based on whether they have visible items
+                gallerySections.forEach(section => {
+                    const hasVisibleItems = section.querySelector('.gallery-item[style*="display: block"]');
+                    section.style.display = hasVisibleItems ? 'block' : 'none';
+                });
+                
+                // Show a message if no results found
+                document.querySelectorAll('.no-results-message').forEach(msg => msg.remove());
+                
+                if (!foundAny) {
+                    const message = document.createElement('div');
+                    message.className = 'no-results-message';
+                    message.innerHTML = `
+                        <div style="text-align: center; padding: 3rem; background: white; border-radius: 20px; margin: 2rem 0; box-shadow: var(--card-shadow);">
+                            <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                            <h3>No matching crafts found</h3>
+                            <p>Try different keywords or browse by category using the filters above.</p>
+                            <button class="filter-btn" style="margin-top: 1rem;" onclick="document.querySelector('.filter-btn[data-filter=\\'all\\']').click()">
+                                Show All Crafts
+                            </button>
+                        </div>
+                    `;
+                    document.querySelector('.filter-container').after(message);
+                }
+            });
+
+            // Testimonials slider
+            const testimonialContainer = document.querySelector('.testimonials-container');
+            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+            const testimonialDots = document.querySelectorAll('.testimonials-dot');
+            let currentSlide = 0;
+            
+            function showSlide(index) {
+                testimonialContainer.style.transform = `translateX(-${index * 100}%)`;
+                
+                testimonialDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                
+                currentSlide = index;
+            }
+            
+            testimonialDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                });
+            });
+            
+            // Auto-rotate testimonials
+            setInterval(() => {
+                const nextSlide = (currentSlide + 1) % testimonialSlides.length;
+                showSlide(nextSlide);
+            }, 6000);
+
+            // Enhanced Modal with thumbnails
+            const modal = document.querySelector('.gallery-modal');
+            const modalImg = document.getElementById('modal-img');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDesc = document.getElementById('modal-description');
+            const modalArtisan = document.getElementById('modal-artisan');
+            const modalLocation = document.getElementById('modal-location');
+            const modalTags = document.getElementById('modal-tags');
+            const modalThumbnails = document.getElementById('modal-thumbnails');
+            const closeModal = document.querySelector('.close-modal');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            let currentIndex = 0;
+            let visibleItems = [];
+            
+            // Simulated additional images for items (in a real implementation, this would come from a database)
+            const additionalImages = {
+                'Ceramic Vase': [
+                    '/api/placeholder/600/400?text=Detail+View',
+                    '/api/placeholder/600/400?text=Side+View',
+                    '/api/placeholder/600/400?text=Close+Up'
+                ],
+                'Wau Bulan': [
+                    '/api/placeholder/600/400?text=In+Flight',
+                    '/api/placeholder/600/400?text=Pattern+Detail',
+                    '/api/placeholder/600/400?text=Construction'
+                ]
+                // Add more for other items as needed
+            };
+
+            // Function to get currently visible items
+            const getVisibleItems = () => {
+                return Array.from(document.querySelectorAll('.gallery-item, .showcase-item')).filter(item => {
+                    return window.getComputedStyle(item).display !== 'none' && 
+                           window.getComputedStyle(item.closest('section')).display !== 'none';
+                });
+            };
+
+            // Function to open modal with item details
+            function openModal(item) {
+                // Update visible items and current index
+                visibleItems = getVisibleItems();
+                currentIndex = visibleItems.indexOf(item);
+                
+                updateModal(item);
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                closeModal.focus();
+            }
+            
+            // Attach click and keypress events to all gallery and showcase items
+            document.querySelectorAll('.gallery-item, .showcase-item').forEach(item => {
+                item.addEventListener('click', () => openModal(item));
+                item.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openModal(item);
+                    }
+                });
+            });
+            
+            // Update modal content with item details
+            function updateModal(item) {
+                const img = item.querySelector('img');
+                const title = item.querySelector('h3').textContent;
+                const desc = item.querySelector('p').textContent;
+                
+                // Extract artisan and location if available
+                const artisanEl = item.querySelector('.gallery-meta-item:first-child');
+                const locationEl = item.querySelector('.gallery-meta-item:nth-child(2)');
+                
+                const artisan = artisanEl ? artisanEl.textContent.replace('i', '').trim() : 'Traditional Artisan';
+                const location = locationEl ? locationEl.textContent.replace('i', '').trim() : 'Malaysia';
+                
+                // Extract tags
+                const tags = Array.from(item.querySelectorAll('.gallery-tag, .showcase-tag'))
+                    .map(tag => tag.textContent);
+                
+                // Update modal content
+                modalImg.src = img.src;
+                modalImg.alt = img.alt;
+                modalTitle.textContent = title;
+                modalDesc.textContent = desc;
+                modalArtisan.textContent = artisan;
+                modalLocation.textContent = location;
+                
+                // Generate tags
+                modalTags.innerHTML = '';
+                tags.forEach(tag => {
+                    const tagEl = document.createElement('span');
+                    tagEl.className = 'modal-tag';
+                    tagEl.textContent = tag;
+                    modalTags.appendChild(tagEl);
+                });
+                
+                // Generate thumbnails if additional images exist
+                modalThumbnails.innerHTML = '';
+                
+                // Always add the main image as first thumbnail
+                const mainThumb = document.createElement('div');
+                mainThumb.className = 'modal-thumbnail active';
+                mainThumb.innerHTML = `<img src="${img.src}" alt="Main view">`;
+                mainThumb.addEventListener('click', () => {
+                    modalImg.src = img.src;
+                    document.querySelectorAll('.modal-thumbnail').forEach(t => t.classList.remove('active'));
+                    mainThumb.classList.add('active');
+                });
+                modalThumbnails.appendChild(mainThumb);
+                
+                // Add additional images if available
+                if (additionalImages[title]) {
+                    additionalImages[title].forEach((imgSrc, i) => {
+                        const thumb = document.createElement('div');
+                        thumb.className = 'modal-thumbnail';
+                        thumb.innerHTML = `<img src="${imgSrc}" alt="Additional view ${i+1}">`;
+                        thumb.addEventListener('click', () => {
+                            modalImg.src = imgSrc;
+                            document.querySelectorAll('.modal-thumbnail').forEach(t => t.classList.remove('active'));
+                            thumb.classList.add('active');
+                        });
+                        modalThumbnails.appendChild(thumb);
+                    });
+                }
+                
+                // Reset scroll position
+                modal.querySelector('.modal-content').scrollTop = 0;
+            }
+            
+            // Close modal events
+            closeModal.addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (!modal.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                if (e.key === 'ArrowLeft') prevBtn.click();
+                if (e.key === 'ArrowRight') nextBtn.click();
+            });
+            
+            // Navigation between items
+            prevBtn.addEventListener('click', () => {
+                if (visibleItems.length <= 1) return;
+                currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+                updateModal(visibleItems[currentIndex]);
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                if (visibleItems.length <= 1) return;
+                currentIndex = (currentIndex + 1) % visibleItems.length;
+                updateModal(visibleItems[currentIndex]);
+            });
+
+            // Pagination
+            const pageButtons = document.querySelectorAll('.page-btn');
+            pageButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (button.classList.contains('active')) return;
+                    
+                    pageButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.removeAttribute('aria-current');
+                    });
+                    
+                    if (!button.classList.contains('text') && !button.querySelector('i')) {
+                        button.classList.add('active');
+                        button.setAttribute('aria-current', 'page');
+                    }
+                    
+                    // Scroll to top of gallery container
+                    document.querySelector('.gallery-container').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Section visibility
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.gallery-section, .featured-showcase, .testimonials-section, .game-section').forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Memory Game
+            const gameBoard = document.getElementById('game-board');
+            const movesCount = document.getElementById('moves-count');
+            const pairsCount = document.getElementById('pairs-count');
+            const timerDisplay = document.getElementById('timer');
+            const gameMessage = document.getElementById('game-message');
+            const restartBtn = document.getElementById('restart-btn');
+            const hintBtn = document.getElementById('hint-btn');
+            const gameCompletion = document.getElementById('game-completion');
+            const completionMoves = document.getElementById('completion-moves');
+            const completionTime = document.getElementById('completion-time');
+            const playAgainBtn = document.getElementById('play-again-btn');
+            
+            let cards = [];
+            let flippedCards = [];
+            let matchedPairs = 0;
+            let moves = 0;
+            let hintsRemaining = 3;
+            let timer;
+            let seconds = 0;
+            let gameStarted = false;
+            let gameEnded = false;
+            
+            // Malaysian craft pattern icons (using Font Awesome for simplicity)
+            const craftPatterns = [
+                { icon: 'fas fa-paint-brush', name: 'Batik Pattern' },
+                { icon: 'fas fa-vector-square', name: 'Songket Pattern' },
+                { icon: 'fas fa-wind', name: 'Wau Kite' },
+                { icon: 'fas fa-tree', name: 'Wood Carving' },
+                { icon: 'fas fa-vase', name: 'Pottery Design' },
+                { icon: 'fas fa-gem', name: 'Silver Filigree' },
+                { icon: 'fas fa-fan', name: 'Weaving Pattern' },
+                { icon: 'fas fa-feather-alt', name: 'Pandan Craft' }
+            ];
+            
+            // Create card pairs and shuffle
+            function createCards() {
+                // Create pairs
+                let cardPairs = [...craftPatterns, ...craftPatterns];
+                
+                // Shuffle using Fisher-Yates algorithm
+                for (let i = cardPairs.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [cardPairs[i], cardPairs[j]] = [cardPairs[j], cardPairs[i]];
+                }
+                
+                return cardPairs;
+            }
+            
+            // Generate the game board
+            function generateGameBoard() {
+                gameBoard.innerHTML = '';
+                cards = createCards();
+                
+                cards.forEach((card, index) => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'memory-card';
+                    cardElement.dataset.index = index;
+                    cardElement.dataset.pattern = card.name;
+                    cardElement.setAttribute('tabindex', '0');
+                    cardElement.setAttribute('aria-label', `Card ${index + 1}, face down`);
+                    
+                    const cardFront = document.createElement('div');
+                    cardFront.className = 'card-front';
+                    cardFront.innerHTML = `<i class="${card.icon} fa-3x craft-icon" style="color: var(--primary-color);"></i>`;
+                    
+                    const cardBack = document.createElement('div');
+                    cardBack.className = 'card-back';
+                    cardBack.innerHTML = '<i class="fas fa-star fa-2x"></i>';
+                    
+                    cardElement.appendChild(cardFront);
+                    cardElement.appendChild(cardBack);
+                    
+                    cardElement.addEventListener('click', () => flipCard(cardElement));
+                    cardElement.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            flipCard(cardElement);
+                        }
+                    });
+                    
+                    gameBoard.appendChild(cardElement);
+                });
+                
+                // Update hint button text
+                hintsRemaining = 3;
+                hintBtn.innerHTML = `<i class="fas fa-lightbulb"></i> Hint (${hintsRemaining})`;
+                hintBtn.disabled = false;
+            }
+            
+            // Flip card function
+            function flipCard(card) {
+                // Don't allow flipping if game is over, card is already flipped or matched, or 2 cards are already flipped
+                if (gameEnded || flippedCards.includes(card) || card.classList.contains('matched') || flippedCards.length >= 2) {
+                    return;
+                }
+                
+                // Start the game on first card flip
+                if (!gameStarted) {
+                    startTimer();
+                    gameStarted = true;
+                }
+                
+                // Flip the card
+                card.classList.add('flipped');
+                card.setAttribute('aria-label', `Card ${parseInt(card.dataset.index) + 1}, ${card.dataset.pattern}, face up`);
+                flippedCards.push(card);
+                
+                // Check for match if 2 cards are flipped
+                if (flippedCards.length === 2) {
+                    moves++;
+                    movesCount.textContent = moves;
+                    
+                    const firstCard = flippedCards[0];
+                    const secondCard = flippedCards[1];
+                    
+                    if (firstCard.dataset.pattern === secondCard.dataset.pattern) {
+                        // Match found
+                        setTimeout(() => {
+                            firstCard.classList.add('matched');
+                            secondCard.classList.add('matched');
+                            firstCard.setAttribute('aria-label', `${firstCard.dataset.pattern} - matched!`);
+                            secondCard.setAttribute('aria-label', `${secondCard.dataset.pattern} - matched!`);
+                            
+                            // Celebration animation
+                            firstCard.style.animation = 'pulse 0.5s';
+                            secondCard.style.animation = 'pulse 0.5s';
+                            
+                            matchedPairs++;
+                            pairsCount.textContent = matchedPairs;
+                            flippedCards = [];
+                            
+                            // Show a quick message
+                            gameMessage.textContent = `Match found! (${firstCard.dataset.pattern})`;
+                            gameMessage.style.color = 'var(--success-color)';
+                            setTimeout(() => {
+                                gameMessage.textContent = '';
+                            }, 1500);
+                            
+                            // Check for game completion
+                            if (matchedPairs === craftPatterns.length) {
+                                endGame();
+                            }
+                        }, 500);
+                    } else {
+                        // No match
+                        setTimeout(() => {
+                            firstCard.classList.remove('flipped');
+                            secondCard.classList.remove('flipped');
+                            firstCard.setAttribute('aria-label', `Card ${parseInt(firstCard.dataset.index) + 1}, face down`);
+                            secondCard.setAttribute('aria-label', `Card ${parseInt(secondCard.dataset.index) + 1}, face down`);
+                            flippedCards = [];
+                            
+                            // Show a quick message
+                            gameMessage.textContent = 'No match, try again!';
+                            gameMessage.style.color = '#777';
+                            setTimeout(() => {
+                                gameMessage.textContent = '';
+                            }, 1500);
+                        }, 1000);
+                    }
+                }
+            }
+            
+            // Hint functionality
+            hintBtn.addEventListener('click', () => {
+                if (hintsRemaining <= 0 || !gameStarted || gameEnded) return;
+                
+                hintsRemaining--;
+                hintBtn.innerHTML = `<i class="fas fa-lightbulb"></i> Hint (${hintsRemaining})`;
+                if (hintsRemaining <= 0) hintBtn.disabled = true;
+                
+                // Find all unmatched cards
+                const unmatchedCards = Array.from(document.querySelectorAll('.memory-card:not(.matched)'));
+                if (unmatchedCards.length <= 0) return;
+                
+                // Group by pattern
+                const patternGroups = {};
+                unmatchedCards.forEach(card => {
+                    const pattern = card.dataset.pattern;
+                    if (!patternGroups[pattern]) patternGroups[pattern] = [];
+                    patternGroups[pattern].push(card);
+                });
+                
+                // Find a pair that's not currently flipped
+                let hintPair = null;
+                for (const pattern in patternGroups) {
+                    if (patternGroups[pattern].length === 2 && 
+                        !patternGroups[pattern][0].classList.contains('flipped') && 
+                        !patternGroups[pattern][1].classList.contains('flipped')) {
+                        hintPair = patternGroups[pattern];
+                        break;
+                    }
+                }
+                
+                if (!hintPair) {
+                    gameMessage.textContent = 'No pairs available for hint!';
+                    gameMessage.style.color = '#777';
+                    setTimeout(() => {
+                        gameMessage.textContent = '';
+                    }, 1500);
+                    return;
+                }
+                
+                // Show hint animation
+                hintPair.forEach(card => {
+                    card.classList.add('hint-flash');
+                    setTimeout(() => {
+                        card.classList.remove('hint-flash');
+                    }, 1000);
+                });
+                
+                gameMessage.textContent = 'Hint: Look for matching patterns!';
+                gameMessage.style.color = 'var(--primary-color)';
+                setTimeout(() => {
+                    gameMessage.textContent = '';
+                }, 1500);
+            });
+            
+            // Timer function
+            function startTimer() {
+                timer = setInterval(() => {
+                    seconds++;
+                    const minutes = Math.floor(seconds / 60);
+                    const remainingSeconds = seconds % 60;
+                    timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+                }, 1000);
+            }
+            
+            // Stop timer
+            function stopTimer() {
+                clearInterval(timer);
+            }
+            
+            // Game completion
+            function endGame() {
+                gameEnded = true;
+                stopTimer();
+                
+                // Update completion overlay
+                completionMoves.textContent = moves;
+                completionTime.textContent = timerDisplay.textContent;
+                
+                // Show completion overlay with delay for animation
+                setTimeout(() => {
+                    gameCompletion.classList.add('visible');
+                }, 1000);
+                
+                // Celebrate with confetti
+                createConfetti();
+            }
+            
+            // Create confetti effect
+            function createConfetti() {
+                const container = document.querySelector('.game-container');
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    
+                    // Random position, color and size
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    confetti.style.backgroundColor = ['#4a6bdf', '#9c3fe6', '#de2828', '#2ecc71', '#f1c40f'][Math.floor(Math.random() * 5)];
+                    confetti.style.width = confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.opacity = Math.random() + 0.5;
+                    
+                    container.appendChild(confetti);
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }
+            }
+            
+            // Reset game
+            function resetGame() {
+                stopTimer();
+                seconds = 0;
+                timerDisplay.textContent = '00:00';
+                moves = 0;
+                movesCount.textContent = '0';
+                matchedPairs = 0;
+                pairsCount.textContent = '0';
+                flippedCards = [];
+                gameStarted = false;
+                gameEnded = false;
+                gameMessage.textContent = '';
+                gameCompletion.classList.remove('visible');
+                
+                generateGameBoard();
+            }
+            
+            // Event listeners for game controls
+            restartBtn.addEventListener('click', resetGame);
+            playAgainBtn.addEventListener('click', resetGame);
+            
+            // Initialize game
+            generateGameBoard();
+            
+            // Add CSS for hint flash animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes hint-flash {
+                    0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(74, 107, 223, 0); }
+                    50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(74, 107, 223, 0.8); }
+                }
+                .hint-flash {
+                    animation: hint-flash 0.5s ease-in-out 2;
+                }
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.1); }
+                    100% { transform: scale(1); }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>

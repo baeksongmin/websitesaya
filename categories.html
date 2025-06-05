@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CraftGallery - Categories</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6bdf;
+            --secondary-color: #9c3fe6;
+            --accent-color: #de2828;
+            --dark-color: #1c1d25;
+            --light-color: #f9f9ff;
+            --card-shadow: 0 10px 30px rgba(74, 107, 223, 0.08);
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-color);
+            color: #444;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient);
+            height: 40vh;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+            max-width: 700px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 1rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav.scrolled a {
+            color: var(--dark-color);
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        nav.scrolled a:hover {
+            background: var(--gradient);
+            color: white;
+        }
+
+        /* Categories Section */
+        .categories-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1rem 0;
+        }
+
+        /* Category Grid */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 380px;
+            position: relative;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(74, 107, 223, 0.2);
+        }
+
+        .category-img {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .category-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover .category-img img {
+            transform: scale(1.1);
+        }
+
+        .category-info {
+            padding: 1.5rem;
+        }
+
+        .category-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            color: var(--dark-color);
+        }
+
+        .category-info p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 107, 223, 0.3);
+        }
+
+        /* Category Filters */
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: white;
+            color: var(--dark-color);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            border: 1px solid #eee;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        
+        .artisan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .artisan-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            padding-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .artisan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(74, 107, 223, 0.15);
+        }
+
+        .artisan-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .artisan-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .artisan-info {
+            padding: 1.5rem 1rem;
+        }
+
+        .artisan-info h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .specialty {
+            background: #f1f3ff;
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Section fade-in */
+        section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                height: 30vh;
+            }
+
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .artisan-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="artisans.html">Artisans</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="tutorials.html">Tutorials</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="map.html">Map</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <h1>Craft Categories</h1>
+            <p>Explore our diverse collection of handcrafted treasures from talented artisans around the world</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="categories-container">
+            <section id="category-filter" class="visible">
+                <div class="section-title">
+                    <h2>Browse Categories</h2>
+                    <p>Discover handcrafted masterpieces across various traditional and contemporary craft categories</p>
+                </div>
+
+                <div class="category-filters">
+                    <button class="filter-btn active" data-filter="all">All Categories</button>
+                    <button class="filter-btn" data-filter="traditional">Traditional</button>
+                    <button class="filter-btn" data-filter="modern">Contemporary</button>
+                    <button class="filter-btn" data-filter="decorative">Decorative</button>
+                    <button class="filter-btn" data-filter="functional">Functional</button>
+                </div>
+
+                <div class="category-grid">
+                    <!-- Pottery Section - Matching the homepage's featured category -->
+                    <div class="category-card" id="pottery" data-category="traditional functional">
+                        <div class="category-img">
+                            <img src="craft1.jpg" alt="Pottery">
+                        </div>
+                        <div class="category-info">
+                            <h3>Pottery</h3>
+                            <p>Handcrafted ceramic masterpieces with centuries of tradition behind every piece</p>
+                            <a href="categories/pottery.html" class="cta-button">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Weaving Section - Matching the homepage's featured category -->
+                    <div class="category-card" id="weaving" data-category="traditional functional">
+                        <div class="category-img">
+                            <img src="craft2.jpg" alt="Weaving">
+                        </div>
+                        <div class="category-info">
+                            <h3>Weaving</h3>
+                            <p>Traditional textile artistry showcasing intricate patterns and exceptional craftsmanship</p>
+                            <a href="categories/weaving.html" class="cta-button">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Batik Section - Matching the homepage's featured category -->
+                    <div class="category-card" id="batik" data-category="traditional decorative">
+                        <div class="category-img">
+                            <img src="craft3.jpg" alt="Batik">
+                        </div>
+                        <div class="category-info">
+                            <h3>Batik</h3>
+                            <p>Traditional wax-resist dyeing technique creating unique patterns on fabric</p>
+                            <a href="categories/batik.html" class="cta-button">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Categories -->
+                    <div class="category-card" data-category="modern decorative">
+                        <div class="category-img">
+                            <img src="craft4.jpg" alt="Glassblowing">
+                        </div>
+                        <div class="category-info">
+                            <h3>Glassblowing</h3>
+                            <p>Beautiful glass art created through traditional and contemporary techniques</p>
+                            <a href="categories/glassblowing.html" class="cta-button">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="traditional decorative">
+                        <div class="category-img">
+                            <img src="craft5.jpg" alt="Woodcarving">
+                        </div>
+                        <div class="category-info">
+                            <h3>Woodcarving</h3>
+                            <p>Exquisite wooden sculptures and items showcasing detailed craftsmanship</p>
+                            <a href="categories/woodcarving.html" class="cta-button">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="modern functional">
+                        <div class="category-img">
+                            <img src="craft6.jpg" alt="Jewelry Making">
+                        </div>
+                        <div class="category-info">
+                            <h3>Jewelry Making</h3>
+                            <p>Handcrafted jewelry pieces blending traditional techniques with modern design</p>
+                            <a href="categories/jewelry.html" class="cta-button">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="modern decorative">
+                        <div class="category-img">
+                            <img src="craft7.jpg" alt="Paper Art">
+                        </div>
+                        <div class="category-info">
+                            <h3>Paper Art</h3>
+                            <p>Intricate paper crafts including origami, quilling, and paper sculpture</p>
+                            <a href="categories/paperart.html" class="cta-button">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="traditional functional">
+                        <div class="category-img">
+                            <img src="craft8.jpg" alt="Basket Weaving">
+                        </div>
+                        <div class="category-info">
+                            <h3>Basket Weaving</h3>
+                            <p>Traditional woven baskets and containers made from natural materials</p>
+                            <a href="categories/basketweaving.html" class="cta-button">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="modern functional">
+                        <div class="category-img">
+                            <img src="craft9.jpg" alt="Leatherwork">
+                        </div>
+                        <div class="category-info">
+                            <h3>Leatherwork</h3>
+                            <p>Hand-crafted leather goods combining functionality with artistic design</p>
+                            <a href="categories/leatherwork.html" class="cta-button">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+          
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Section visibility
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Category filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const categoryCards = document.querySelectorAll('.category-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                categoryCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        const cardCategories = card.getAttribute('data-category');
+                        if (cardCategories && cardCategories.includes(filter)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

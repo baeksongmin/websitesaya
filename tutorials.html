@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn crafting skills with CraftGallery's comprehensive tutorials for all levels">
+    <meta name="keywords" content="craft tutorials, crafting lessons, DIY crafts, artisan skills">
+    <meta name="author" content="CraftGallery">
+    <title>CraftGallery - Tutorials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6bdf;
+            --secondary-color: #9c3fe6;
+            --accent-color: #de2828;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --dark-color: #1c1d25;
+            --light-color: #f9f9ff;
+            --card-shadow: 0 10px 30px rgba(74, 107, 223, 0.08);
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-color);
+            color: #444;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Skip to main content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            z-index: 1001;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Enhanced Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        nav.scrolled .logo {
+            color: var(--primary-color);
+        }
+
+        .logo:hover {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav.scrolled a {
+            color: var(--dark-color);
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        nav.scrolled a:hover, nav.scrolled a.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        nav.scrolled .menu-toggle {
+            color: var(--primary-color);
+        }
+
+        /* Enhanced Header */
+        header {
+            background: var(--gradient);
+            min-height: 40vh;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Header decoration */
+        .header-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            opacity: 0.1;
+        }
+
+        .header-decoration-item {
+            position: absolute;
+            font-size: 8rem;
+            color: white;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .header-decoration-item:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .header-decoration-item:nth-child(2) {
+            top: 60%;
+            left: 20%;
+            animation-delay: 1s;
+        }
+
+        .header-decoration-item:nth-child(3) {
+            top: 20%;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .header-decoration-item:nth-child(4) {
+            top: 50%;
+            left: 80%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+            margin-bottom: 2rem;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .header-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-btn-primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .header-btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+
+        .header-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main content container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Enhanced filter section */
+        .filter-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--card-shadow);
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .filter-heading {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-heading i {
+            color: var(--primary-color);
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .skill-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tab {
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tab:hover, .skill-tab.active {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        .category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .category-tab {
+            background: white;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-tab:hover, .category-tab.active {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(156, 63, 230, 0.2);
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            border-radius: 30px;
+            border: 2px solid #e0e0e0;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 20px rgba(74, 107, 223, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .filter-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: white;
+        }
+
+        .filter-btn-reset {
+            color: var(--dark-color);
+            border: 1px solid #e0e0e0;
+        }
+
+        .filter-btn-apply {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Featured tutorial section */
+        .featured-tutorial {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 4rem;
+            display: flex;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .featured-tutorial.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .featured-label {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            font-weight: 600;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(222, 40, 40, 0.2);
+        }
+
+        .featured-image {
+            width: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .featured-tutorial:hover .featured-image img {
+            transform: scale(1.05);
+        }
+
+        .video-play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-play-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: rgba(222, 40, 40, 0.3);
+        }
+
+        .video-play-button i {
+            margin-left: 5px;
+        }
+
+        .featured-content {
+            width: 50%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .featured-description {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .tutorial-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tutorial-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .tutorial-stat i {
+            color: var(--primary-color);
+        }
+
+        .tutorial-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .rating-stars {
+            color: var(--warning-color);
+        }
+
+        .rating-count {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .featured-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .featured-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .featured-btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .featured-btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .featured-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        /* Tutorial Category Pills */
+        .tutorial-category-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tutorial-category-pill {
+            background: rgba(74, 107, 223, 0.1);
+            color: var(--primary-color);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Section headings */
+        .section-heading {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+            font-size: 2.2rem;
+            color: var(--dark-color);
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* Tutorial sections */
+        .tutorials-section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .tutorials-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Tutorials grid */
+        .tutorials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .tutorial-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .tutorial-card.hidden {
+            display: none;
+        }
+
+        .tutorial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(74, 107, 223, 0.2);
+        }
+
+        .tutorial-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tutorial-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .tutorial-card:hover .tutorial-image img {
+            transform: scale(1.1);
+        }
+
+        /* Enhanced YouTube Play Button - Fill more of the card */
+        .tutorial-card .video-play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 0, 0, 0.8);
+            border: none;
+            opacity: 0.9;
+            z-index: 5;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-card:hover .video-play-button {
+            width: 80px;
+            height: 80px;
+            opacity: 1;
+        }
+
+        .tutorial-card .video-play-button i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* YouTube overlay for entire card */
+        .tutorial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0);
+            z-index: 1;
+            transition: background 0.3s ease;
+            pointer-events: none;
+            border-radius: 20px;
+        }
+
+        .tutorial-card:hover::before {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* YouTube icon in corner */
+        .tutorial-youtube-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 0, 0, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            z-index: 6;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .tutorial-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tutorial-content h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            color: var(--dark-color);
+        }
+
+        .tutorial-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .skill-level {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+
+        .beginner { background: #e6f7d9; color: var(--success-color); }
+        .intermediate { background: #fff3cd; color: var(--warning-color); }
+        .advanced { background: #f8d7da; color: var(--accent-color); }
+
+        .tutorial-desc {
+            margin-bottom: 1.5rem;
+            color: #666;
+            flex-grow: 1;
+        }
+
+        .tutorial-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .tutorial-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            align-self: flex-start;
+        }
+
+        .tutorial-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        /* Preview button for tutorial cards */
+        .tutorial-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .tutorial-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .tutorial-btn-primary {
+            background: var(--gradient);
+            color: white;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .tutorial-btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .tutorial-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 5rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        
+        .faq-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 4rem;
+        }
+
+        .pagination-container {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .page-btn.text {
+            width: auto;
+            padding: 0 1rem;
+            border-radius: 20px;
+        }
+
+        .page-btn:hover, .page-btn.active {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+        }
+
+        .page-divider {
+            color: #777;
+            font-weight: 500;
+        }
+
+        /* Enhanced Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-logo i {
+            font-size: 2.2rem;
+            -webkit-text-fill-color: initial;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-about p {
+            color: #ddd;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-social a:hover {
+            background: var(--gradient);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a i {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            text-align: center;
+            color: #ddd;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 900;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* YouTube Video Modal */
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .video-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .video-container {
+            width: 90%;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 56.25vw;
+            max-height: 562.5px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-video {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-video:hover {
+            transform: rotate(90deg);
+            color: var(--accent-color);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .featured-tutorial { flex-direction: column; }
+            .featured-image, .featured-content { width: 100%; }
+            .featured-image { height: 300px; }
+        }
+
+        @media (max-width: 992px) {
+            .tutorials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header { min-height: 30vh; }
+            .header-content h1 { font-size: 2.5rem; }
+            .nav-container { padding: 0.5rem 1rem; }
+            .header-buttons { flex-direction: column; gap: 1rem; }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav.scrolled .menu-toggle { color: var(--primary-color); }
+            
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.5rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 1010;
+            }
+            
+            nav ul.active { transform: translateY(0); }
+            nav a { color: var(--dark-color); }
+            
+            .tutorials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-actions {
+                flex-direction: column;
+            }
+
+            .filter-row { 
+                flex-direction: column; 
+                gap: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-toggle { display: none; }
+        }
+
+        /* Focus styles for accessibility */
+        a:focus, button:focus, input:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    
+    <!-- Back to top button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <nav role="navigation">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-palette"></i> CraftGallery
+            </a>
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="artisans.html"><i class="fas fa-user-friends"></i> Artisans</a></li>
+                <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="#" class="active" aria-current="page"><i class="fas fa-book-open"></i> Tutorials</a></li>
+                <li><a href="reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+                <li><a href="map.html"><i class="fas fa-map-marked-alt"></i> Map</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header role="banner">
+        <div class="header-decoration">
+            <div class="header-decoration-item"><i class="fas fa-paint-brush"></i></div>
+            <div class="header-decoration-item"><i class="fas fa-hammer"></i></div>
+            <div class="header-decoration-item"><i class="fas fa-pencil-ruler"></i></div>
+            <div class="header-decoration-item"><i class="fas fa-cut"></i></div>
+        </div>
+    <br><br><br><br>
+        <div class="header-content">
+            <h1>Craft Tutorials & Workshops</h1>
+            <p>Discover comprehensive tutorials and workshops to help you learn and master traditional Malaysian craft techniques from our expert artisans.</p>
+            <div class="header-buttons">
+                <a href="#featured-tutorial" class="header-btn header-btn-primary">
+                    <i class="fas fa-crown"></i> Featured Tutorial
+                </a>
+                <a href="#all-tutorials" class="header-btn header-btn-secondary">
+                    <i class="fas fa-th-large"></i> Browse All Tutorials
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="main-container">
+        <section class="filter-container" aria-labelledby="filter-heading">
+            <h2 id="filter-heading" class="filter-heading">
+                <i class="fas fa-filter"></i> Find the Perfect Tutorial
+            </h2>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label class="filter-label" for="search-input">Search</label>
+                    <div class="search-box">
+                        <input id="search-input" type="text" placeholder="Search for tutorials..." aria-label="Search tutorials">
+                        <span class="search-icon" aria-hidden="true">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label class="filter-label">Skill Level</label>
+                    <div class="skill-tabs" role="radiogroup" aria-label="Filter by skill level">
+                        <button class="skill-tab active" data-skill="all" role="radio" aria-checked="true">All Levels</button>
+                        <button class="skill-tab" data-skill="beginner" role="radio" aria-checked="false">Beginner</button>
+                        <button class="skill-tab" data-skill="intermediate" role="radio" aria-checked="false">Intermediate</button>
+                        <button class="skill-tab" data-skill="advanced" role="radio" aria-checked="false">Advanced</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Category</label>
+                    <div class="category-tabs" role="radiogroup" aria-label="Filter by category">
+                        <button class="category-tab active" data-category="all" role="radio" aria-checked="true">All Categories</button>
+                        <button class="category-tab" data-category="pottery" role="radio" aria-checked="false">Pottery</button>
+                        <button class="category-tab" data-category="weaving" role="radio" aria-checked="false">Weaving</button>
+                        <button class="category-tab" data-category="woodwork" role="radio" aria-checked="false">Woodwork</button>
+                        <button class="category-tab" data-category="batik" role="radio" aria-checked="false">Batik</button>
+                        <button class="category-tab" data-category="kite" role="radio" aria-checked="false">Kite Making</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-actions">
+                <button type="button" class="filter-btn filter-btn-reset" id="reset-filters">Reset Filters</button>
+                <button type="button" class="filter-btn filter-btn-apply" id="apply-filters">Apply Filters</button>
+            </div>
+        </section>
+
+        <section id="featured-tutorial" class="featured-tutorial" aria-labelledby="featured-tutorial-heading">
+            <span class="featured-label">Featured</span>
+            <div class="featured-image">
+                <img src="picture/video1.png" alt="Mastering the Pottery Wheel Tutorial" loading="lazy">
+                <div class="video-play-button video-trigger" data-video-id="cMWwkrODJRc">
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+            <div class="featured-content">
+                <div class="tutorial-category-pills">
+                    <span class="tutorial-category-pill">Pottery</span>
+                    <span class="tutorial-category-pill">Techniques</span>
+                </div>
+                <h2 id="featured-tutorial-heading">Mastering the Pottery Wheel</h2>
+                
+                <div class="tutorial-rating">
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="rating-count">(128 reviews)</span>
+                </div>
+                
+                <div class="tutorial-stats">
+                    <div class="tutorial-stat">
+                        <i class="fas fa-clock"></i>
+                        <span>6 minutes</span>
+                    </div>
+                    <div class="tutorial-stat">
+                        <i class="fas fa-signal"></i>
+                        <span>Beginner friendly</span>
+                    </div>
+                </div>
+                
+                <p class="featured-description">Learn the fundamentals of using a pottery wheel in this comprehensive tutorial. This video covers everything from preparing your clay to centering, pulling, and shaping your first vessel. Perfect for beginners who want to start their pottery journey right. The demonstration shows the key techniques needed to create beautiful pottery on the wheel.</p>
+                
+                <div class="featured-actions">
+                    <a href="https://youtu.be/cMWwkrODJRc" class="featured-btn featured-btn-primary" target="_blank" rel="noopener">
+                        <i class="fab fa-youtube"></i> Watch on YouTube
+                    </a>
+                    <button class="featured-btn featured-btn-secondary video-trigger" data-video-id="cMWwkrODJRc">
+                        <i class="fas fa-eye"></i> Preview
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="all-tutorials" class="tutorials-section" aria-labelledby="popular-tutorials-heading">
+            <h2 id="popular-tutorials-heading" class="section-heading">Popular Tutorials</h2>
+            
+            <div class="tutorials-grid" role="list">
+                <!-- Tutorial 1 -->
+                <div class="tutorial-card" data-skill="beginner" data-category="pottery" role="listitem" tabindex="0" data-video-id="-YCGK33c0xs">
+                    <div class="tutorial-youtube-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="tutorial-image">
+                        <img src="picture/video2.png" alt="Clay Preparation Tutorial" loading="lazy">
+                        <div class="video-play-button">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                    <div class="tutorial-content">
+                        <div class="tutorial-category-pills">
+                            <span class="tutorial-category-pill">Pottery</span>
+                            <span class="tutorial-category-pill">Materials</span>
+                        </div>
+                        <h3>Clay Preparation & Selection</h3>
+                        <div class="tutorial-meta">
+                            <span><span class="skill-level beginner">Beginner</span></span>
+                            <span>12 minutes</span>
+                        </div>
+                        <p class="tutorial-desc">This tutorial explores handbuilt pottery without a wheel. Learn how to prepare your clay, create beautiful textures, and form functional pieces using simple tools. See demonstration of scoring and slipping techniques for attaching clay pieces securely, making this perfect for beginners looking to start clay work with minimal equipment.</p>
+                        <div class="tutorial-info">
+                            <div class="tutorial-rating">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tutorial-actions">
+                            <a href="https://youtu.be/-YCGK33c0xs" class="tutorial-btn tutorial-btn-primary" target="_blank" rel="noopener">
+                                <i class="fab fa-youtube"></i> Watch on YouTube
+                            </a>
+                            <button class="tutorial-btn tutorial-btn-secondary video-trigger" data-video-id="-YCGK33c0xs">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tutorial 2 -->
+                <div class="tutorial-card" data-skill="intermediate" data-category="weaving" role="listitem" tabindex="0" data-video-id="ytwScMpL8QI">
+                    <div class="tutorial-youtube-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="tutorial-image">
+                        <img src="picture/video3.png" alt="Traditional Songket Weaving" loading="lazy">
+                        <div class="video-play-button">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                    <div class="tutorial-content">
+                        <div class="tutorial-category-pills">
+                            <span class="tutorial-category-pill">Weaving</span>
+                            <span class="tutorial-category-pill">Textiles</span>
+                        </div>
+                        <h3>Traditional Songket Weaving</h3>
+                        <div class="tutorial-meta">
+                            <span><span class="skill-level intermediate">Intermediate</span></span>
+                            <span>4 minutes</span>
+                        </div>
+                        <p class="tutorial-desc">This tutorial showcases traditional cloth weaving techniques from Southeast Asia. Watch as intricate thread patterns come together to create beautiful textiles. The video demonstrates step-by-step setup of a traditional loom, the threading process, and weaving patterns that create the characteristic designs of handmade textiles.</p>
+                        <div class="tutorial-info">
+                            <div class="tutorial-rating">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tutorial-actions">
+                            <a href="https://youtu.be/ytwScMpL8QI" class="tutorial-btn tutorial-btn-primary" target="_blank" rel="noopener">
+                                <i class="fab fa-youtube"></i> Watch on YouTube
+                            </a>
+                            <button class="tutorial-btn tutorial-btn-secondary video-trigger" data-video-id="ytwScMpL8QI">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tutorial 3 -->
+                <div class="tutorial-card" data-skill="beginner" data-category="batik" role="listitem" tabindex="0" data-video-id="zjbW9GC14cQ">
+                    <div class="tutorial-youtube-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="tutorial-image">
+                        <img src="picture/video4.png" alt="Introduction to Batik" loading="lazy">
+                        <div class="video-play-button">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                    <div class="tutorial-content">
+                        <div class="tutorial-category-pills">
+                            <span class="tutorial-category-pill">Batik</span>
+                            <span class="tutorial-category-pill">Textiles</span>
+                        </div>
+                        <h3>Introduction to Batik Art</h3>
+                        <div class="tutorial-meta">
+                            <span><span class="skill-level beginner">Beginner</span></span>
+                            <span>9 minutes</span>
+                        </div>
+                        <p class="tutorial-desc">Discover the beautiful art of batik in this introduction to wax-resist dyeing. Watch as vibrant patterns emerge through the application of wax and dyes on fabric. This video demonstrates the process of creating a traditional batik design, from drawing patterns to wax application and dyeing techniques that produce the distinctive crackled effect of authentic batik.</p>
+                        <div class="tutorial-info">
+                            <div class="tutorial-rating">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tutorial-actions">
+                            <a href="https://youtu.be/zjbW9GC14cQ" class="tutorial-btn tutorial-btn-primary" target="_blank" rel="noopener">
+                                <i class="fab fa-youtube"></i> Watch on YouTube
+                            </a>
+                            <button class="tutorial-btn tutorial-btn-secondary video-trigger" data-video-id="zjbW9GC14cQ">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tutorial 4 -->
+                <div class="tutorial-card" data-skill="advanced" data-category="woodwork" role="listitem" tabindex="0" data-video-id="Ve-jVpUIE-E">
+                    <div class="tutorial-youtube-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="tutorial-image">
+                        <img src="picture/video5.png"alt="Advanced Woodcarving" loading="lazy">
+                        <div class="video-play-button">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                    <div class="tutorial-content">
+                        <div class="tutorial-category-pills">
+                            <span class="tutorial-category-pill">Woodwork</span>
+                            <span class="tutorial-category-pill">Carving</span>
+                        </div>
+                        <h3>Advanced Woodcarving Techniques</h3>
+                        <div class="tutorial-meta">
+                            <span><span class="skill-level advanced">Advanced</span></span>
+                            <span>8 minutes</span>
+                        </div>
+                        <p class="tutorial-desc">Watch expert woodcarving techniques as intricate patterns emerge from wooden blocks. This video demonstrates advanced knife control, corner carving, and relief techniques that create depth and texture in wooden art pieces. Learn the precision cuts and tool handling that professional woodcarvers use to create beautiful finished works.</p>
+                        <div class="tutorial-info">
+                            <div class="tutorial-rating">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tutorial-actions">
+                            <a href="https://youtu.be/Ve-jVpUIE-E" class="tutorial-btn tutorial-btn-primary" target="_blank" rel="noopener">
+                                <i class="fab fa-youtube"></i> Watch on YouTube
+                            </a>
+                            <button class="tutorial-btn tutorial-btn-secondary video-trigger" data-video-id="Ve-jVpUIE-E">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tutorial 5 -->
+                <div class="tutorial-card" data-skill="intermediate" data-category="pottery" role="listitem" tabindex="0" data-video-id="HgKodiI2MMc">
+                    <div class="tutorial-youtube-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="tutorial-image">
+                        <img src="picture/video6.png" alt="Handbuilding Pottery" loading="lazy">
+                        <div class="video-play-button">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                    <div class="tutorial-content">
+                        <div class="tutorial-category-pills">
+                            <span class="tutorial-category-pill">Pottery</span>
+                            <span class="tutorial-category-pill">Handbuilding</span>
+                        </div>
+                        <h3>Handbuilding Pottery Techniques</h3>
+                        <div class="tutorial-meta">
+                            <span><span class="skill-level intermediate">Intermediate</span></span>
+                            <span>3 minutes</span>
+                        </div>
+                        <p class="tutorial-desc">See how to create beautiful pottery without a wheel through handbuilding techniques. This tutorial shows pinch pot, coil building, and slab construction methods to create functional and decorative pieces. Learn professional-level techniques for smoothing surfaces, adding texture, and achieving even thickness throughout your handbuilt pottery creations.</p>
+                        <div class="tutorial-info">
+                            <div class="tutorial-rating">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tutorial-actions">
+                            <a href="https://youtu.be/HgKodiI2MMc" class="tutorial-btn tutorial-btn-primary" target="_blank" rel="noopener">
+                                <i class="fab fa-youtube"></i> Watch on YouTube
+                            </a>
+                            <button class="tutorial-btn tutorial-btn-secondary video-trigger" data-video-id="HgKodiI2MMc">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tutorial 6 -->
+                <div class="tutorial-card" data-skill="beginner" data-category="kite" role="listitem" tabindex="0" data-video-id="VhTCa8ODxJw">
+                    <div class="tutorial-youtube-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="tutorial-image">
+                        <img src="picture/video7.png" alt="Traditional Wau Kite Making" loading="lazy">
+                        <div class="video-play-button">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                    <div class="tutorial-content">
+                        <div class="tutorial-category-pills">
+                            <span class="tutorial-category-pill">Kite Making</span>
+                            <span class="tutorial-category-pill">Traditional Arts</span>
+                        </div>
+                        <h3>Traditional Wau Kite Making</h3>
+                        <div class="tutorial-meta">
+                            <span><span class="skill-level beginner">Beginner</span></span>
+                            <span>7 minutes</span>
+                        </div>
+                        <p class="tutorial-desc">Learn the art of making traditional Malaysian Wau kites in this tutorial. The video demonstrates bamboo frame construction, paper application, and decorative techniques that make these kites both functional and beautiful. See how the traditional crafting methods create a sturdy kite that combines artistic design with excellent flying capability.</p>
+                        <div class="tutorial-info">
+                            <div class="tutorial-rating">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tutorial-actions">
+                            <a href="https://youtu.be/VhTCa8ODxJw" class="tutorial-btn tutorial-btn-primary" target="_blank" rel="noopener">
+                                <i class="fab fa-youtube"></i> Watch on YouTube
+                            </a>
+                            <button class="tutorial-btn tutorial-btn-secondary video-trigger" data-video-id="VhTCa8ODxJw">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+         
+
+        <section class="tutorials-section" aria-labelledby="beginner-tutorials-heading">
+            <h2 id="beginner-tutorials-heading" class="section-heading">Beginner Tutorials</h2>
+            
+            <div class="tutorials-grid" role="list">
+                <!-- Additional beginner tutorials can be added here -->
+                <div class="tutorial-card" data-skill="beginner" data-category="batik" role="listitem" tabindex="0" data-video-id="Fk1iO7a9yIk">
+                    <div class="tutorial-youtube-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="tutorial-image">
+                        <img src="picture/video8.png" alt="Batik Color Theory" loading="lazy">
+                        <div class="video-play-button">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                    <div class="tutorial-content">
+                        <div class="tutorial-category-pills">
+                            <span class="tutorial-category-pill">Batik</span>
+                            <span class="tutorial-category-pill">Color Theory</span>
+                        </div>
+                        <h3>Batik Color Theory: Creating Vibrant Designs</h3>
+                        <div class="tutorial-meta">
+                            <span><span class="skill-level beginner">Beginner</span></span>
+                            <span>3 minutes</span>
+                        </div>
+                        <p class="tutorial-desc">Discover color theory principles specifically for batik art in this tutorial. Learn how traditional and contemporary color palettes work in batik designs, how colors interact with wax resist techniques, and how to create vibrant, harmonious combinations that make your batik pieces stand out with professional quality.</p>
+                        <div class="tutorial-info">
+                            <div class="tutorial-rating">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tutorial-actions">
+                            <a href="https://youtube.com/shorts/Fk1iO7a9yIk?si=TivJMEHPIkK-c1SL" class="tutorial-btn tutorial-btn-primary" target="_blank" rel="noopener">
+                                <i class="fab fa-youtube"></i> Watch on YouTube
+                            </a>
+                            <button class="tutorial-btn tutorial-btn-secondary video-trigger" data-video-id="Fk1iO7a9yIk">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-card" data-skill="beginner" data-category="woodwork" role="listitem" tabindex="0" data-video-id="Uv4krEZAe7E">
+                    <div class="tutorial-youtube-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="tutorial-image">
+                        <img src="picture/video9.png" alt="Basic Woodworking Tools" loading="lazy">
+                        <div class="video-play-button">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                    <div class="tutorial-content">
+                        <div class="tutorial-category-pills">
+                            <span class="tutorial-category-pill">Woodwork</span>
+                            <span class="tutorial-category-pill">Tools</span>
+                        </div>
+                        <h3>Essential Woodworking Tools</h3>
+                        <div class="tutorial-meta">
+                            <span><span class="skill-level beginner">Beginner</span></span>
+                            <span>3 minutes</span>
+                        </div>
+                        <p class="tutorial-desc">Learn about essential tools for woodworking traditions in this comprehensive guide. This tutorial covers different chisel types, mallets, knives, and specialized tools used in Southeast Asian woodcarving. Discover proper tool handling, effective sharpening techniques, and maintenance practices that ensure your tools last for years of creative woodworking.</p>
+                        <div class="tutorial-info">
+                            <div class="tutorial-rating">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tutorial-actions">
+                            <a href="https://youtu.be/Uv4krEZAe7E?si=77r8PRosfakAvI71" class="tutorial-btn tutorial-btn-primary" target="_blank" rel="noopener">
+                                <i class="fab fa-youtube"></i> Watch on YouTube
+                            </a>
+                            <button class="tutorial-btn tutorial-btn-secondary video-trigger" data-video-id="Uv4krEZAe7E">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-card" data-skill="beginner" data-category="weaving" role="listitem" tabindex="0" data-video-id="5YVeMj2tbpk">
+                    <div class="tutorial-youtube-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="tutorial-image">
+                        <img src="picture/video10.png" alt="Introduction to Pandan Weaving" loading="lazy">
+                        <div class="video-play-button">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                    <div class="tutorial-content">
+                        <div class="tutorial-category-pills">
+                            <span class="tutorial-category-pill">Weaving</span>
+                            <span class="tutorial-category-pill">Pandan</span>
+                        </div>
+                        <h3>Introduction to Pandan Weaving</h3>
+                        <div class="tutorial-meta">
+                            <span><span class="skill-level beginner">Beginner</span></span>
+                            <span>3 minutes</span>
+                        </div>
+                        <p class="tutorial-desc">Discover the traditional craft of pandan leaf weaving in this beginner-friendly tutorial. Learn how to harvest, prepare, and process pandan leaves for weaving, master basic weaving patterns, and create simple functional items like mats and baskets using this sustainable, locally abundant material.</p>
+                        <div class="tutorial-info">
+                            <div class="tutorial-rating">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tutorial-actions">
+                            <a href="https://youtu.be/5YVeMj2tbpk?si=kkWlESmUENX5Y8wE" class="tutorial-btn tutorial-btn-primary" target="_blank" rel="noopener">
+                                <i class="fab fa-youtube"></i> Watch on YouTube
+                            </a>
+                            <button class="tutorial-btn tutorial-btn-secondary video-trigger" data-video-id="5YVeMj2tbpk">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section" aria-labelledby="faq-heading">
+            <h2 id="faq-heading" class="section-heading">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" tabindex="0" aria-expanded="false">
+                        <span>Do I need special equipment to follow along with the tutorials?</span>
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Most of our beginner tutorials are designed to require minimal specialized equipment. At the beginning of each tutorial, our instructors provide a detailed list of materials and tools needed, with suggestions for alternatives when possible. For more advanced tutorials, specific equipment may be necessary, but we always provide information on where these tools can be purchased.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" tabindex="0" aria-expanded="false">
+                        <span>Can I watch the tutorials at my own pace?</span>
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Our tutorials are hosted on YouTube, so you can pause, rewind, and revisit them as many times as you need. This makes it easy to learn at your own pace and return to specific techniques that you want to master. The YouTube platform also allows you to adjust playback speed if you want to slow down demonstrations of more complex techniques.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" tabindex="0" aria-expanded="false">
+                        <span>How can I get feedback on my projects?</span>
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We encourage students to share their work in the comments section of our YouTube videos. Our instructors regularly check these comments and provide feedback. Additionally, you can join our Facebook community group where both instructors and fellow craft enthusiasts offer support, suggestions, and encouragement. For more personalized feedback, some of our artisans offer one-on-one virtual sessions that can be booked through our website.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" tabindex="0" aria-expanded="false">
+                        <span>Are there tutorials suitable for children?</span>
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We have a selection of tutorials specifically designed for younger crafters (with adult supervision). These are clearly marked with a "Family-Friendly" tag and include simpler projects with age-appropriate techniques. We recommend that an adult reviews the tutorial first to assess suitability based on the child's age, skill level, and the tools involved. Many of our beginner-level tutorials can also be adapted for younger audiences with proper supervision.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" tabindex="0" aria-expanded="false">
+                        <span>Do you provide subtitles or translations for the tutorials?</span>
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, all of our tutorials include English subtitles, and many are also available with Malay, Mandarin, and Tamil subtitles. We're continuously working to expand our language options. Since our videos are hosted on YouTube, you can also use YouTube's auto-translation feature for additional language options, though please note that auto-translations may not always be perfectly accurate.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <i class="fas fa-palette"></i> CraftGallery
+                </div>
+                <p>Celebrating and preserving Malaysia's rich crafting traditions through our curated collection of artisan tutorials and workshops.</p>
+               
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-angle-right"></i> Home</a></li>
+                    <li><a href="artisans.html"><i class="fas fa-angle-right"></i> Artisans</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-angle-right"></i> Gallery</a></li>
+                    <li><a href="#"><i class="fas fa-angle-right"></i> Tutorials</a></li>
+                    <li><a href="contact.html"><i class="fas fa-angle-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            
+           
+            
+            <div class="footer-links">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Alor Setar,Kedah Malaysia</a></li>
+                    <li><a href="#"><i class="fas fa-phone"></i> +60 11-37575698</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> muhdfayyadh256@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2025 CraftGallery. All rights reserved. Supporting Malaysian artisans and cultural heritage.
+        </div>
+    </footer>
+
+    <!-- YouTube Video Modal -->
+    <div class="video-modal" id="video-modal">
+        <div class="video-container">
+            <button class="close-video" id="close-video" aria-label="Close video">
+                <i class="fas fa-times"></i>
+            </button>
+            <iframe id="youtube-frame" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                const isExpanded = navMenu.classList.contains('active');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
+                menuToggle.innerHTML = isExpanded ? 
+                    '<i class="fas fa-times"></i>' : 
+                    '<i class="fas fa-bars"></i>';
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('nav') && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+
+            // Navigation scroll
+            function handleScroll() {
+                const nav = document.querySelector('nav');
+                nav.classList.toggle('scrolled', window.scrollY > 100);
+                
+                // Back to top button visibility
+                const backToTop = document.getElementById('back-to-top');
+                backToTop.classList.toggle('visible', window.scrollY > 300);
+            }
+            
+            window.addEventListener('scroll', handleScroll);
+            // Call once on load to set initial state
+            handleScroll();
+            
+            // Back to top button
+            document.getElementById('back-to-top').addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // YouTube Video Modal
+            const videoModal = document.getElementById('video-modal');
+            const youtubeFrame = document.getElementById('youtube-frame');
+            const closeVideo = document.getElementById('close-video');
+            const videoTriggers = document.querySelectorAll('.video-trigger, .video-play-button');
+            
+            // Make tutorial cards clickable to show preview
+            const tutorialCards = document.querySelectorAll('.tutorial-card');
+            tutorialCards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    // Don't trigger if clicking on the YouTube link itself
+                    if (e.target.closest('.tutorial-link') || e.target.closest('.tutorial-btn')) return;
+                    
+                    const videoId = card.getAttribute('data-video-id');
+                    if (videoId) {
+                        openVideoModal(videoId);
+                    }
+                });
+            });
+            
+            // Make YouTube icons explicitly clickable
+            const youtubeIcons = document.querySelectorAll('.tutorial-youtube-icon');
+            youtubeIcons.forEach(icon => {
+                icon.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Stop the event from bubbling to the card
+                    const card = icon.closest('.tutorial-card');
+                    const videoId = card.getAttribute('data-video-id');
+                    if (videoId) {
+                        openVideoModal(videoId);
+                    }
+                });
+            });
+            
+            // Open modal and load YouTube video
+            videoTriggers.forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent card click event from firing
+                    const videoId = trigger.getAttribute('data-video-id');
+                    openVideoModal(videoId);
+                });
+            });
+            
+            function openVideoModal(videoId) {
+                youtubeFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                videoModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Close modal and stop YouTube video
+            closeVideo.addEventListener('click', () => {
+                videoModal.classList.remove('active');
+                youtubeFrame.src = '';
+                document.body.style.overflow = '';
+            });
+            
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) {
+                    closeVideo.click();
+                }
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                    closeVideo.click();
+                }
+            });
+
+            // Skill and Category filtering
+            const skillTabs = document.querySelectorAll('.skill-tab');
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            let currentSkill = 'all';
+            let currentCategory = 'all';
+            
+            // Filter reset button
+            document.getElementById('reset-filters').addEventListener('click', () => {
+                // Reset skill tabs
+                skillTabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    tab.setAttribute('aria-checked', 'false');
+                });
+                document.querySelector('.skill-tab[data-skill="all"]').classList.add('active');
+                document.querySelector('.skill-tab[data-skill="all"]').setAttribute('aria-checked', 'true');
+                currentSkill = 'all';
+                
+                // Reset category tabs
+                categoryTabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    tab.setAttribute('aria-checked', 'false');
+                });
+                document.querySelector('.category-tab[data-category="all"]').classList.add('active');
+                document.querySelector('.category-tab[data-category="all"]').setAttribute('aria-checked', 'true');
+                currentCategory = 'all';
+                
+                // Reset search input
+                document.getElementById('search-input').value = '';
+                
+                // Show all tutorial cards
+                tutorialCards.forEach(card => {
+                    card.classList.remove('hidden');
+                });
+            });
+            
+            // Skill tab click
+            skillTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    skillTabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.setAttribute('aria-checked', 'false');
+                    });
+                    tab.classList.add('active');
+                    tab.setAttribute('aria-checked', 'true');
+                    currentSkill = tab.getAttribute('data-skill');
+                });
+            });
+            
+            // Category tab click
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    categoryTabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.setAttribute('aria-checked', 'false');
+                    });
+                    tab.classList.add('active');
+                    tab.setAttribute('aria-checked', 'true');
+                    currentCategory = tab.getAttribute('data-category');
+                });
+            });
+            
+            // Apply filters button
+            document.getElementById('apply-filters').addEventListener('click', () => {
+                const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+                
+                tutorialCards.forEach(card => {
+                    const skill = card.getAttribute('data-skill');
+                    const category = card.getAttribute('data-category');
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const desc = card.querySelector('.tutorial-desc').textContent.toLowerCase();
+                    const categories = Array.from(card.querySelectorAll('.tutorial-category-pill'))
+                        .map(pill => pill.textContent.toLowerCase());
+                    
+                    const matchesSkill = currentSkill === 'all' || skill === currentSkill;
+                    const matchesCategory = currentCategory === 'all' || category === currentCategory;
+                    const matchesSearch = !searchTerm || 
+                                        title.includes(searchTerm) || 
+                                        desc.includes(searchTerm) || 
+                                        categories.some(cat => cat.includes(searchTerm));
+                    
+                    card.classList.toggle('hidden', !(matchesSkill && matchesCategory && matchesSearch));
+                });
+                
+                document.getElementById('all-tutorials').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // FAQ accordion
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    const isOpen = faqItem.classList.contains('active');
+                    
+                    // Close all FAQ items
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                        item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                    });
+                    
+                    // Open clicked FAQ item if it was closed
+                    if (!isOpen) {
+                        faqItem.classList.add('active');
+                        question.setAttribute('aria-expanded', 'true');
+                    }
+                });
+                
+                // Keyboard accessibility for FAQ
+                question.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        question.click();
+                    }
+                });
+            });
+
+            // Section visibility with IntersectionObserver
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.featured-tutorial, .tutorials-section, .faq-section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Keyboard accessibility for tutorial cards
+            tutorialCards.forEach(card => {
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const videoId = card.getAttribute('data-video-id');
+                        if (videoId) {
+                            openVideoModal(videoId);
+                        }
+                    }
+                });
+            });
+            
+            // Pagination functionality
+            const pageButtons = document.querySelectorAll('.page-btn');
+            pageButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (button.classList.contains('active')) return;
+                    
+                    pageButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.removeAttribute('aria-current');
+                    });
+                    
+                    if (!button.querySelector('i')) {
+                        button.classList.add('active');
+                        button.setAttribute('aria-current', 'page');
+                    }
+                    
+                    // Here you would typically load new tutorial data
+                    // For now, we'll just scroll to the tutorials section
+                    document.getElementById('all-tutorials').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

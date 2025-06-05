@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover beautiful handmade crafts at CraftGallery">
+    <meta name="keywords" content="crafts, handmade, artisans, gallery">
+    <meta name="author" content="CraftGallery">
+    <title>CraftGallery - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6bdf;
+            --secondary-color: #9c3fe6;
+            --accent-color: #de2828;
+            --bright-accent: #FF9C1A;
+            --cheerful-green: #22DD9B;
+            --playful-pink: #FF6B9F;
+            --dark-color: #1c1d25;
+            --light-color: #f9f9ff;
+            --card-shadow: 0 10px 30px rgba(74, 107, 223, 0.08);
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            --cheerful-gradient: linear-gradient(135deg, var(--cheerful-green), var(--bright-accent));
+            --playful-gradient: linear-gradient(135deg, var(--bright-accent), var(--playful-pink));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-color);
+            color: #444;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234a6bdf' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+        }
+
+        /* Skip to main content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            z-index: 1001;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Animated background with colorful particles */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            opacity: 0.1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float-particles 15s infinite linear;
+        }
+
+        @keyframes float-particles {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        nav.scrolled .logo {
+            color: var(--primary-color);
+        }
+
+        .logo:hover {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav.scrolled a {
+            color: var(--dark-color);
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        nav.scrolled a:hover, nav.scrolled a.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        nav.scrolled .menu-toggle {
+            color: var(--primary-color);
+        }
+
+        header {
+            background: var(--gradient);
+            min-height: 90vh;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.2;
+            z-index: 1;
+            animation: backgroundShift 20s linear infinite;
+        }
+
+        @keyframes backgroundShift {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 20%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            bottom: 10%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+
+        .shape:nth-child(4) {
+            width: 80px;
+            height: 80px;
+            bottom: 30%;
+            right: 25%;
+            animation-delay: 6s;
+        }
+
+        .shape:nth-child(5) {
+            width: 170px;
+            height: 170px;
+            top: 40%;
+            left: 35%;
+            animation-delay: 8s;
+        }
+
+        /* Add colorful shapes with different patterns */
+        .shape-colorful {
+            position: absolute;
+            border-radius: 50%;
+            animation: float-rotate 15s infinite;
+            opacity: 0.7;
+        }
+
+        .shape-colorful:nth-child(6) {
+            width: 120px;
+            height: 120px;
+            top: 15%;
+            left: 25%;
+            background: var(--cheerful-gradient);
+            animation-delay: 1s;
+        }
+
+        .shape-colorful:nth-child(7) {
+            width: 100px;
+            height: 100px;
+            top: 45%;
+            right: 15%;
+            background: var(--playful-gradient);
+            animation-delay: 3s;
+        }
+
+        .shape-colorful:nth-child(8) {
+            width: 80px;
+            height: 80px;
+            bottom: 25%;
+            left: 40%;
+            background: var(--gradient-accent);
+            animation-delay: 5s;
+        }
+
+        @keyframes float-rotate {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-20px) rotate(90deg) scale(1.1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(0) rotate(180deg) scale(1);
+                opacity: 0.5;
+            }
+            75% {
+                transform: translateY(20px) rotate(270deg) scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg) scale(1);
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.5;
+            }
+            25% {
+                transform: translateY(-20px) rotate(90deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(0) rotate(180deg);
+                opacity: 0.5;
+            }
+            75% {
+                transform: translateY(20px) rotate(270deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 0.5;
+            }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out, colorCycle 8s infinite alternate;
+            background: linear-gradient(to right, #ffffff, #f0f0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        @keyframes colorCycle {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(60deg);
+            }
+        }
+
+        /* Add sparkles around the title */
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            animation: twinkle 3s infinite;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { 
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .header-content p {
+            font-size: 1.7rem;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1s ease-out 0.3s backwards, floatText 5s ease-in-out infinite;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes floatText {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 7rem 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+            position: relative;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Playfair Display', serif;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            margin: 15px auto 0;
+            border-radius: 2px;
+            transform: scaleX(0);
+            transition: transform 0.8s ease;
+        }
+
+        section.visible h2::after {
+            transform: scaleX(1);
+        }
+
+        /* Animated underline with rainbow colors */
+        section.visible h2::after {
+            transform: scaleX(1);
+            animation: rainbowShift 3s infinite alternate;
+        }
+
+        @keyframes rainbowShift {
+            0% {
+                background: var(--gradient);
+            }
+            50% {
+                background: var(--cheerful-gradient);
+            }
+            100% {
+                background: var(--playful-gradient);
+            }
+        }
+
+        .category-card {
+            position: relative;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+            filter: brightness(0.95);
+        }
+
+        .category-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(74, 107, 223, 0.3);
+        }
+
+        /* Enhanced card hover effects with 3D flip */
+        .category-card {
+            transform-style: preserve-3d;
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .category-card:hover {
+            transform: translateY(-15px) rotateY(5deg) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(74, 107, 223, 0.3);
+        }
+
+        .category-card:hover img {
+            transform: scale(1.15);
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 2rem;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .category-card:hover .category-overlay {
+            transform: translateY(0);
+        }
+
+        .category-overlay h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease 0.1s;
+        }
+
+        .category-overlay p {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease 0.2s;
+        }
+
+        .category-card:hover .category-overlay h3,
+        .category-card:hover .category-overlay p {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .explore-btn {
+            margin-top: 1rem;
+            padding: 0.5rem 1.2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card:hover .explore-btn {
+            transform: translateY(0);
+            opacity: 1;
+            animation: pulse 2s infinite;
+        }
+
+        /* Button rainbow effect */
+        .explore-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .category-card:hover .explore-btn::before {
+            left: 100%;
+            transition: all 0.5s ease;
+        }
+
+        .explore-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(74, 107, 223, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--gradient-accent);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(74, 107, 223, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover:before {
+            width: 100%;
+        }
+
+        /* Add a shining effect to CTA button */
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: all 0.5s ease;
+            z-index: 2;
+        }
+
+        .cta-button:hover::after {
+            left: 100%;
+            transition: 0.5s ease;
+        }
+
+        /* Add a pulsing animation to CTA button */
+        @keyframes ctaPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(74, 107, 223, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(74, 107, 223, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(74, 107, 223, 0);
+            }
+        }
+
+        .header-content .cta-button {
+            animation: ctaPulse 2s infinite;
+        }
+
+        .section-divider {
+            height: 150px;
+            background: var(--gradient);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            transform: skewY(-3deg);
+            transform-origin: 0;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            animation: backgroundShift 20s linear infinite;
+        }
+
+        /* Add floating icons to the divider */
+        .section-divider-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: skewY(3deg);
+        }
+
+        .divider-icon {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2);
+            animation: floatIcon 6s infinite ease-in-out;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        /* Enhanced Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-about {
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-logo i {
+            font-size: 2.2rem;
+            -webkit-text-fill-color: initial;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-about p {
+            color: #ddd;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-social a:hover {
+            background: var(--gradient);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a i {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            text-align: center;
+            color: #ddd;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 10px 25px rgba(74, 107, 223, 0.3);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(74, 107, 223, 0.2);
+            }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header { min-height: 70vh; }
+            .header-content h1 { font-size: 3.5rem; }
+            .nav-container { padding: 0.5rem 1rem; }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav.scrolled .menu-toggle { color: var(--primary-color); }
+            
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.5rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 1010;
+            }
+            
+            nav ul.active { transform: translateY(0); }
+            nav a { color: var(--dark-color); }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Custom cursor effect -->
+    <div class="cursor-dot"></div>
+    <div class="custom-cursor"></div>
+
+    <!-- Background particles animation -->
+    <div class="bg-animation">
+        <!-- Particles will be generated by JS -->
+    </div>
+
+    <nav role="navigation">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-palette"></i> CraftGallery
+            </a>
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="nav-menu">
+                <li><a href="index.html" class="active" aria-current="page"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="artisans.html"><i class="fas fa-user-friends"></i> Artisans</a></li>
+                <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="tutorials.html"><i class="fas fa-book-open"></i> Tutorials</a></li>
+                <li><a href="reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+                <li><a href="map.html"><i class="fas fa-map-marked-alt"></i> Map</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header role="banner">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape-colorful"></div>
+            <div class="shape-colorful"></div>
+            <div class="shape-colorful"></div>
+        </div>
+        
+        <!-- Confetti animation for a celebratory feel -->
+        <div class="confetti-container">
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+        </div>
+        
+        <!-- Animated wave background -->
+        <div class="wave-bg"></div>
+        
+        <div class="header-content">
+            <h1 id="main-title">CraftGallery</h1>
+            <!-- Sparkles around the title will be added by JS -->
+            <p class="typing-animation">Discover the Beauty and Artistry of Handmade Crafts in Malaysia </p>
+            <a href="gallery.html" class="cta-button" aria-label="Explore Gallery">
+                Explore Our Collection
+            </a>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section id="featured">
+            <h2>Featured Categories</h2>
+            <div class="grid" role="list">
+                <div class="category-card animated fade-in-left delay-1" role="listitem" onclick="location.href='gallery.html#pottery'" tabindex="0">
+                    <img src="picture/craft1.jpg" alt="Pottery" loading="lazy">
+                    <div class="category-overlay">
+                        <h3>Pottery</h3>
+                        <p>Handcrafted ceramic masterpieces from master artisans</p>
+                        <button class="explore-btn">Explore More</button>
+                    </div>
+                </div>
+                <div class="category-card animated fade-in-up delay-2" role="listitem" onclick="location.href='gallery.html#weaving'" tabindex="0">
+                    <img src="picture/craft2.jpg" alt="Weaving" loading="lazy">
+                    <div class="category-overlay">
+                        <h3>Weaving</h3>
+                        <p>Traditional textile artistry with generations of heritage</p>
+                        <button class="explore-btn">Explore More</button>
+                    </div>
+                </div>
+                <div class="category-card animated fade-in-right delay-3" role="listitem" onclick="location.href='gallery.html#batik'" tabindex="0">
+                    <img src="picture/craft3.jpg" alt="Batik" loading="lazy">
+                    <div class="category-overlay">
+                        <h3>Batik</h3>
+                        <p>Exquisite traditional batik designs with cultural significance</p>
+                        <button class="explore-btn">Explore More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider">
+            <!-- Floating craft icons in the divider -->
+            <div class="section-divider-icons">
+                <i class="fas fa-palette divider-icon" style="top: 30%; left: 20%; font-size: 2rem;"></i>
+                <i class="fas fa-paint-brush divider-icon" style="top: 50%; left: 40%; font-size: 1.8rem; animation-delay: 1s;"></i>
+                <i class="fas fa-scissors divider-icon" style="top: 20%; left: 60%; font-size: 1.5rem; animation-delay: 2s;"></i>
+                <i class="fas fa-pencil-alt divider-icon" style="top: 60%; left: 80%; font-size: 2.2rem; animation-delay: 3s;"></i>
+            </div>
+        </div>
+
+        <section id="about">
+            <h2>Why Choose CraftGallery</h2>
+            <!-- Flying craft elements -->
+            <div class="flying-element" style="top: 20%; left: 5%;"><i class="fas fa-leaf"></i></div>
+            <div class="flying-element" style="top: 30%; right: 10%; animation-delay: 5s;"><i class="fas fa-feather"></i></div>
+            <div class="flying-element" style="bottom: 10%; left: 15%; animation-delay: 10s;"><i class="fas fa-star"></i></div>
+            
+            <div class="grid">
+                <div class="info-card animated fade-in-left delay-1">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Authentic Craftsmanship</h3>
+                    <p>Each piece in our collection is handcrafted by skilled artisans using traditional techniques passed down through generations.</p>
+                </div>
+                <div class="info-card animated fade-in-up delay-2">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3>Global Artisans</h3>
+                    <p>We work with talented craftspeople from around the world, bringing diverse cultural traditions to your doorstep.</p>
+                </div>
+                <div class="info-card animated fade-in-right delay-3">
+                    <i class="fas fa-heart"></i>
+                    <h3>Supporting Communities</h3>
+                    <p>Your supports really mean to us</p>
+                </div>
+            </div>
+        </section>
+
+      
+
+
+    <!-- Enhanced Footer -->
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <i class="fas fa-palette"></i> CraftGallery
+                </div>
+                <p>Celebrating and preserving Malaysia's rich crafting traditions through our curated collection of artisan masterpieces.</p>
+                
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-angle-right"></i> Home</a></li>
+                    <li><a href="artisans.html"><i class="fas fa-angle-right"></i> Artisans</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-angle-right"></i> Gallery</a></li>
+                    <li><a href="tutorials.html"><i class="fas fa-angle-right"></i> Tutorials</a></li>
+                    <li><a href="contact.html"><i class="fas fa-angle-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            
+           
+            
+            <div class="footer-links">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Alor Setar,Kedah, Malaysia</a></li>
+                    <li><a href="tel:+601137575698"><i class="fas fa-phone"></i> +60 1137575698</a></li>
+                    <li><a href="mailto:muhdfayyadh256@gmail.com"><i class="fas fa-envelope"></i> muhdfayyadh256@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2025 CraftGallery. All rights reserved. Supporting Malaysian artisans and cultural heritage.
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            navMenu.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            menuToggle.innerHTML = isExpanded ? 
+                '<i class="fas fa-bars"></i>' : 
+                '<i class="fas fa-times"></i>';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav') && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // Section visibility
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll down button
+        document.querySelector('.scroll-down').addEventListener('click', () => {
+            document.getElementById('featured').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // Keyboard accessibility for cards
+        document.querySelectorAll('.category-card, .info-card, .testimonial').forEach(card => {
+            card.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    card.click();
+                }
+            });
+        });
+
+        // Apply animations when scrolling
+        const animateOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    if (el.classList.contains('animated')) {
+                        el.style.visibility = 'visible';
+                        el.style.animationName = el.dataset.animation || 'fadeInUp';
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animated').forEach(el => {
+            el.style.visibility = 'hidden';
+            animateOnScroll.observe(el);
+        });
+
+        // Generate sparkles around the title
+        function createSparkles() {
+            const title = document.getElementById('main-title');
+            const titleRect = title.getBoundingClientRect();
+            
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                
+                // Position randomly around the title
+                const randomX = Math.random() * (titleRect.width + 100) - 50;
+                const randomY = Math.random() * (titleRect.height + 100) - 50;
+                
+                sparkle.style.left = `${randomX}px`;
+                sparkle.style.top = `${randomY}px`;
+                
+                // Random animation delay
+                sparkle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                // Add to title container
+                title.appendChild(sparkle);
+            }
+        }
+        
+        // Call it after page loads
+        window.addEventListener('load', createSparkles);
+        
+        // Create background particles
+        function createParticles() {
+            const bgAnimation = document.querySelector('.bg-animation');
+            const colors = [
+                'var(--primary-color)', 
+                'var(--secondary-color)', 
+                'var(--accent-color)',
+                'var(--cheerful-green)',
+                'var(--bright-accent)',
+                'var(--playful-pink)'
+            ];
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position, size and color
+                const size = Math.random() * 15 + 5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.backgroundColor = color;
+                particle.style.opacity = Math.random() * 0.5;
+                
+                // Random animation duration and delay
+                particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                bgAnimation.appendChild(particle);
+            }
+        }
+        
+        // Call it after page loads
+        window.addEventListener('load', createParticles);
+        
+        // Custom cursor effect
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.custom-cursor');
+            const dot = document.querySelector('.cursor-dot');
+            
+            if (cursor && dot) {
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
+                
+                dot.style.left = `${e.clientX}px`;
+                dot.style.top = `${e.clientY}px`;
+            }
+        });
+    </script>
+</body>
+</html>
